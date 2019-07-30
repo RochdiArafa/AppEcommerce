@@ -1,0 +1,89 @@
+ecommerce_homepage:
+    path:     /home
+    defaults: { _controller: EcommerceBundle:Default:home }
+
+dashboard_admin:
+    path:     /admin/dashboard
+    defaults: { _controller: EcommerceBundle:Default:dashboard }
+
+Produit_consulter:
+    path:     /produit/consulter
+    defaults: { _controller: EcommerceBundle:Produit:consulter }
+
+Categorie_list_dashboard:
+    path:     /admin/dashboard/categorie/afficher
+    defaults: { _controller: EcommerceBundle:Categorie:afficher }
+
+supprimer_categorie_dashboard:
+    path:     /admin/dashboard/categorie/supprimer
+    defaults: { _controller: EcommerceBundle:Categorie:supprimer }
+
+Categorie_goajouter_dashboard:
+    path:     /admin/dashboard/categorie/goajouter
+    defaults: { _controller: EcommerceBundle:Categorie:goajouter }
+
+Categorie_ajouter_dashboard:
+    path:     /admin/dashboard/categorie/ajouter
+    defaults: { _controller: EcommerceBundle:Categorie:ajouter }
+
+Categorie_goupdate_dashboard:
+    path:     /admin/dashboard/categorie/goupdate
+    defaults: { _controller: EcommerceBundle:Categorie:goupdate }
+
+Categorie_update_dashboard:
+    path:     /admin/dashboard/categorie/update
+    defaults: { _controller: EcommerceBundle:Categorie:update }
+
+
+
+Fournisseur_list_dashboard:
+    path:     /admin/dashboard/fournisseur/afficher
+    defaults: { _controller: EcommerceBundle:Fournisseur:afficher }
+
+supprimer_fournisseur_dashboard:
+    path:     /admin/dashboard/fournisseur/supprimer
+    defaults: { _controller: EcommerceBundle:Fournisseur:supprimer }
+
+Fournisseur_goajouter_dashboard:
+    path:     /admin/dashboard/fournisseur/goajouter
+    defaults: { _controller: EcommerceBundle:Fournisseur:goajouter }
+
+Fournisseur_ajouter_dashboard:
+    path:     /admin/dashboard/fournisseur/ajouter
+    defaults: { _controller: EcommerceBundle:Fournisseur:ajouter }
+
+Fournisseur_goupdate_dashboard:
+    path:     /admin/dashboard/fournisseur/goupdate
+    defaults: { _controller: EcommerceBundle:Fournisseur:goupdate }
+
+Fournisseur_update_dashboard:
+    path:     /admin/dashboard/fournisseur/update
+    defaults: { _controller: EcommerceBundle:Fournisseur:update }
+
+
+
+Produit_list_dashboard:
+    path:     /admin/dashboard/produit/afficher
+    defaults: { _controller: EcommerceBundle:Produit:afficher }
+
+supprimer_produit_dashboard:
+    path:     /admin/dashboard/produit/supprimer
+    defaults: { _controller: EcommerceBundle:Produit:supprimer }
+
+Produit_goajouter_dashboard:
+    path:     /admin/dashboard/produit/goajouter
+    defaults: { _controller: EcommerceBundle:Produit:goajouter }
+
+Produit_ajouter_dashboard:
+    path:     /admin/dashboard/produit/ajouter
+    defaults: { _controller: EcommerceBundle:Produit:ajouter }
+
+Produit_goupdate_dashboard:
+    path:     /admin/dashboard/produit/goupdate
+    defaults: { _controller: EcommerceBundle:Produit:goupdate }
+
+Produit_update_dashboard:
+    path:     /admin/dashboard/produit/update
+    defaults: { _controller: EcommerceBundle:Produit:update }
+
+
