@@ -13,8 +13,10 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         $categories = $em->getRepository("EcommerceBundle:Categorie")->findAll();
 
+        $produits = $em->getRepository("EcommerceBundle:Produit")->findAll();
 
-        return $this->render('@Ecommerce/Default/home.html.twig' , ["categories" => $categories]);
+
+        return $this->render('@Ecommerce/Default/home.html.twig' , ["produits" => $produits , "categories" => $categories]);
     }
 
     public function dashboardAction()

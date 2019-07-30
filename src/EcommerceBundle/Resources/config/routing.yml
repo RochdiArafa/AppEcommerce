@@ -86,4 +86,17 @@ Produit_update_dashboard:
     path:     /admin/dashboard/produit/update
     defaults: { _controller: EcommerceBundle:Produit:update }
 
+Produit_list_front:
+    path:     /shop
+    defaults: { _controller: EcommerceBundle:Produit:afficherFront }
+
+Avis_ajouter:
+    path:     /avis/ajouter
+    defaults: { _controller: EcommerceBundle:Avis:ajouter }
+
+
+
+
+
+
 

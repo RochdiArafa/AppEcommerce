@@ -3,6 +3,7 @@
 namespace EcommerceBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use AppBundle;
 
 /**
  * Avis
@@ -40,6 +41,12 @@ class Avis
      * @ORM\Column(name="description", type="string", length=255)
      */
     private $description;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
+     * @ORM\JoinColumn(referencedColumnName="id" , onDelete="CASCADE")
+     */
+    private $User;
 
 
     /**
@@ -98,5 +105,29 @@ class Avis
     public function getProduit()
     {
         return $this->Produit;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return Avis
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 }

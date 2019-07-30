@@ -10,9 +10,18 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 class ProduitController extends Controller
 {
 
-    public function consulterAction()
+    public function consulterAction(Request $request)
     {
-        return $this->render('@Ecommerce/Produit/consulter.html.twig');
+        //recuperer id du produit à consulter
+        $id = $request->get('id');
+
+        //recuperer le produit à consulter à partir de leur id
+        $em = $this->getDoctrine()->getManager();
+        $produit = $em->getRepository("EcommerceBundle:Produit")->find($id);
+
+        $aviss= $em->getRepository("EcommerceBundle:Avis")->findBy(["Produit" => $produit]);
+
+        return $this->render('@Ecommerce/Produit/consulter.html.twig' , ["produit" => $produit , "aviss" => $aviss]);
     }
 
     public function ajouterAction(Request $request)
@@ -140,7 +149,18 @@ class ProduitController extends Controller
         $fournisseurs = $em->getRepository("EcommerceBundle:Fournisseur")->findAll();
 
         return $this->render('@Ecommerce\Produit\modifier.html.twig' , ["produit" => $produit,"categories" => $categories , "fournisseurs" => $fournisseurs  ] );
+    }
+
+    public function afficherFrontAction()
+    {
+        //afficher tous les categories
+
+        $em = $this->getDoctrine()->getManager();
+        $categories = $em->getRepository("EcommerceBundle:Categorie")->findAll();
+
+        $produits = $em->getRepository("EcommerceBundle:Produit")->findAll();
 
 
+        return $this->render('@Ecommerce/Produit/afficher_front.html.twig' , ["produits" => $produits , "categories" => $categories]);
     }
 }
