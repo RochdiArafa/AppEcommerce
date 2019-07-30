@@ -1,90 +1,56 @@
 {% extends 'dashboard.html.twig' %}
 
 {% block content %}
-    <div class="courses-area">
+    <div class="product-status mg-b-15">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                    <div class="courses-inner res-mg-b-30">
-                        <div class="courses-title">
-                            <a href="#"><img src="{{ asset('Admin_Dashboard/img/courses/1.jpg')}}" alt=""></a>
-                            <h2>Apps Development</h2>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="product-status-wrap drp-lst">
+                        <h4>Liste Produit</h4>
+                        <div class="add-product">
+                            <a href="{{ path("Produit_goajouter_dashboard")}}">Ajouter Produit</a>
                         </div>
-                        <div class="courses-alaltic">
-                            <span class="cr-ic-r"><span class="course-icon"><i class="fa fa-clock"></i></span> 1 Year</span>
-                            <span class="cr-ic-r"><span class="course-icon"><i class="fa fa-heart"></i></span> 50</span>
-                            <span class="cr-ic-r"><span class="course-icon"><i class="fa fa-dollar"></i></span> 500</span>
+                        <div class="asset-inner">
+                            <table>
+                                <tbody><tr>
+                                    <th>Nom</th>
+                                    <th>Description</th>
+                                    <th>Quantité</th>
+                                    <th>Prix</th>
+                                    <th>Catégorie</th>
+                                    <th>Fournisseur</th>
+                                    <th>Couleur</th>
+                                    <th>Actions</th>
+                                </tr>
+                                {% for produit in produits %}
+                                    <tr>
+                                        <td>{{ produit.nom }}</td>
+                                        <td>{{ produit.description }}</td>
+                                        <td>{{ produit.stock }}</td>
+                                        <td>{{ produit.prix }}</td>
+                                        <td>{{ produit.Categorie.nom }}</td>
+                                        <td>{{ produit.Fournisseur.nom }}</td>
+                                        <td>{{ produit.color }}</td>
+
+                                        <td>
+                                            <a href="{{ path("Produit_goupdate_dashboard",{'id': produit.id} ) }}"> <i class="fa fa-pencil-square-o" aria-hidden="true" ></i></a>
+                                            <a href="{{ path("supprimer_produit_dashboard",{'id': produit.id} ) }}"> <i class="fa fa-trash-o" aria-hidden="true" style="color:#ac2925"></i></a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
                         </div>
-                        <div class="course-des">
-                            <p><span><i class="fa fa-clock"></i></span> <b>Duration:</b> 6 Months</p>
-                            <p><span><i class="fa fa-clock"></i></span> <b>Professor:</b> Jane Doe</p>
-                            <p><span><i class="fa fa-clock"></i></span> <b>Students:</b> 100+</p>
-                        </div>
-                        <div class="product-buttons">
-                            <button type="button" class="button-default cart-btn">Read More</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                    <div class="courses-inner">
-                        <div class="courses-title">
-                            <a href="#"><img src="{{ asset('Admin_Dashboard/img/courses/2.jpg')}}" alt=""></a>
-                            <h2>Illustrator CC 2018</h2>
-                        </div>
-                        <div class="courses-alaltic">
-                            <span class="cr-ic-r"><span class="course-icon"><i class="fa fa-clock"></i></span> 1 Year</span>
-                            <span class="cr-ic-r"><span class="course-icon"><i class="fa fa-heart"></i></span> 50</span>
-                            <span class="cr-ic-r"><span class="course-icon"><i class="fa fa-dollar"></i></span> 500</span>
-                        </div>
-                        <div class="course-des">
-                            <p><span><i class="fa fa-clock"></i></span> <b>Duration:</b> 6 Months</p>
-                            <p><span><i class="fa fa-clock"></i></span> <b>Professor:</b> Jane Doe</p>
-                            <p><span><i class="fa fa-clock"></i></span> <b>Students:</b> 100+</p>
-                        </div>
-                        <div class="product-buttons">
-                            <button type="button" class="button-default cart-btn">Read More</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                    <div class="courses-inner res-mg-t-30 dk-res-t-pro-30">
-                        <div class="courses-title">
-                            <a href="#"><img src="{{ asset('Admin_Dashboard/img/courses/3.jpg')}}" alt=""></a>
-                            <h2>Indesign cs6 2018</h2>
-                        </div>
-                        <div class="courses-alaltic">
-                            <span class="cr-ic-r"><span class="course-icon"><i class="fa fa-clock"></i></span> 1 Year</span>
-                            <span class="cr-ic-r"><span class="course-icon"><i class="fa fa-heart"></i></span> 50</span>
-                            <span class="cr-ic-r"><span class="course-icon"><i class="fa fa-dollar"></i></span> 500</span>
-                        </div>
-                        <div class="course-des">
-                            <p><span><i class="fa fa-clock"></i></span> <b>Duration:</b> 6 Months</p>
-                            <p><span><i class="fa fa-clock"></i></span> <b>Professor:</b> Jane Doe</p>
-                            <p><span><i class="fa fa-clock"></i></span> <b>Students:</b> 100+</p>
-                        </div>
-                        <div class="product-buttons">
-                            <button type="button" class="button-default cart-btn">Read More</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                    <div class="courses-inner res-mg-t-30 dk-res-t-pro-30">
-                        <div class="courses-title">
-                            <a href="#"><img src="{{ asset('Admin_Dashboard/img/courses/1.jpg')}}" alt=""></a>
-                            <h2>Web Development</h2>
-                        </div>
-                        <div class="courses-alaltic">
-                            <span class="cr-ic-r"><span class="course-icon"><i class="fa fa-clock"></i></span> 1 Year</span>
-                            <span class="cr-ic-r"><span class="course-icon"><i class="fa fa-heart"></i></span> 50</span>
-                            <span class="cr-ic-r"><span class="course-icon"><i class="fa fa-dollar"></i></span> 500</span>
-                        </div>
-                        <div class="course-des">
-                            <p><span><i class="fa fa-clock"></i></span> <b>Duration:</b> 6 Months</p>
-                            <p><span><i class="fa fa-clock"></i></span> <b>Professor:</b> Jane Doe</p>
-                            <p><span><i class="fa fa-clock"></i></span> <b>Students:</b> 100+</p>
-                        </div>
-                        <div class="product-buttons">
-                            <button type="button" class="button-default cart-btn">Read More</button>
+                        <div class="custom-pagination">
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination">
+                                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                </ul>
+                            </nav>
                         </div>
                     </div>
                 </div>

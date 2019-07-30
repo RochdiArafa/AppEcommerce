@@ -1,0 +1,82 @@
+{% extends 'dashboard.html.twig' %}
+
+{% block content %}
+<!-- Static Table Start -->
+    <div class="product-tab-list tab-pane fade active in" id="description" style="margin-left: 20px;">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="review-content-section">
+                    <h4>Ajouter Produit</h4>
+                    <form id="add-department" action="{{ path("Produit_ajouter_dashboard" ) }}"  method="post" class="add-department" novalidate="novalidate">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <input name="nom" type="text" class="form-control" placeholder="Nom">
+                                </div>
+                                <div class="form-group">
+                                    <input name="description" type="text" class="form-control" placeholder="Description">
+                                </div>
+                                <div class="form-group">
+                                    <input name="materials" type="email" class="form-control" placeholder="matière">
+                                </div>
+                                <div class="form-group">
+                                    <input name="size" type="email" class="form-control" placeholder="Taille">
+                                </div>
+                                <div class="form-group">
+                                    <input name="color" type="text" class="form-control" placeholder="Couleur">
+                                </div>
+                                <div class="form-group">
+                                    <input type=text list=categor class="form-control" placeholder="Categorie" name="categorie">
+                                    <datalist id=categor  >
+                                        {% for categorie in categories %}
+                                            <option> {{ categorie.nom }}
+                                        {% endfor %}
+                                    </datalist>
+                                </div>
+
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <input name="stock" type="number" class="form-control" placeholder="Quantité">
+                                </div>
+                                <div class="form-group">
+                                    <input name="prix" type="number" class="form-control" placeholder="Prix">
+                                </div>
+                                <div class="form-group">
+                                    <input name="weight" type="text" class="form-control" placeholder="Poids">
+                                </div>
+                                <div class="form-group">
+                                    <input name="dimensions" type="text" class="form-control" placeholder="dimensions">
+                                </div>
+                                <div class="form-group">
+                                    <input name="materials" type="text" class="form-control" placeholder="materials">
+                                </div>
+                                <div class="form-group">
+                                    <input type=text list=fourniss class="form-control" placeholder="Fournisseur" name="fournisseur">
+                                    <datalist id=fourniss  >
+                                        {% for fournisseur in fournisseurs %}
+                                            <option> {{ fournisseur.nom }}
+                                        {% endfor %}
+                                    </datalist>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input name="image" type="file" class="form-control" placeholder="Image">
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="payment-adress">
+                                    <button type="submit" class="btn btn-primary waves-effect waves-light">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- Static Table End -->
+
+{% endblock content %}
