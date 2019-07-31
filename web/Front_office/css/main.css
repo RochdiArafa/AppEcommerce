@@ -858,6 +858,15 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
   right: 0;
 }
 
+.show-sidebar-favorie {
+  visibility: visible;
+  background-color: rgba(0,0,0,0.6);
+}
+
+.show-sidebar-fovarie .sidebar {
+  right: 0;
+}
+
 @media (max-width: 991px) {
   .wrap-sidebar {
     display: none;
@@ -961,6 +970,19 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 .show-header-cart .header-cart {
   right: 0;
 }
+
+/*-----    favorie -----*/
+
+.show-header-favorie {
+  visibility: visible;
+  background-color: rgba(0,0,0,0.6);
+}
+
+.show-header-favorie .header-cart {
+  right: 0;
+}
+
+
 
 /*---------------------------------------------*/
 .header-cart-title {

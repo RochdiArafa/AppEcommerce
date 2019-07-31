@@ -21,7 +21,14 @@ class ProduitController extends Controller
 
         $aviss= $em->getRepository("EcommerceBundle:Avis")->findBy(["Produit" => $produit]);
 
-        return $this->render('@Ecommerce/Produit/consulter.html.twig' , ["produit" => $produit , "aviss" => $aviss]);
+        $session = $request->getSession();
+
+        if(!$session->has('panier'))
+            $session->set('panier', array());
+
+        $em = $this->getDoctrine()->getManager();
+        $produitpanier = $em->getRepository("EcommerceBundle:Produit")->findArray(array_keys(($session->get('panier'))));
+        return $this->render('@Ecommerce/Produit/consulter.html.twig' , ["produit" => $produit , "aviss" => $aviss , "produitspanier" => $produitpanier ,  "panier" => $session->get('panier')]);
     }
 
     public function ajouterAction(Request $request)
@@ -151,7 +158,7 @@ class ProduitController extends Controller
         return $this->render('@Ecommerce\Produit\modifier.html.twig' , ["produit" => $produit,"categories" => $categories , "fournisseurs" => $fournisseurs  ] );
     }
 
-    public function afficherFrontAction()
+    public function afficherFrontAction( Request $request)
     {
         //afficher tous les categories
 
@@ -160,7 +167,13 @@ class ProduitController extends Controller
 
         $produits = $em->getRepository("EcommerceBundle:Produit")->findAll();
 
+        $session = $request->getSession();
 
-        return $this->render('@Ecommerce/Produit/afficher_front.html.twig' , ["produits" => $produits , "categories" => $categories]);
+        if(!$session->has('panier'))
+            $session->set('panier', array());
+
+        $em = $this->getDoctrine()->getManager();
+        $produitpanier = $em->getRepository("EcommerceBundle:Produit")->findArray(array_keys(($session->get('panier'))));
+        return $this->render('@Ecommerce/Produit/afficher_front.html.twig' , ["produits" => $produits , "categories" => $categories , "produitspanier" => $produitpanier ,  "panier" => $session->get('panier')]);
     }
 }

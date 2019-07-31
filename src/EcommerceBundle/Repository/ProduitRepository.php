@@ -10,4 +10,13 @@ namespace EcommerceBundle\Repository;
  */
 class ProduitRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findArray($array){
+
+        $rq = $this->createQueryBuilder('u')
+            ->select('u')
+            ->where('u.id IN (:array)')
+            ->setParameter('array'  , $array);
+
+        return $rq->getQuery()->getResult();
+    }
 }

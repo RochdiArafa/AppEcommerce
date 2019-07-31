@@ -94,6 +94,25 @@ Avis_ajouter:
     path:     /avis/ajouter
     defaults: { _controller: EcommerceBundle:Avis:ajouter }
 
+Panier_ajouter:
+    path:     /panier/ajouter
+    defaults: { _controller: EcommerceBundle:Panier:ajouter }
+
+Panier_afficher:
+    path:     /panier/afficher
+    defaults: { _controller: EcommerceBundle:Panier:afficher }
+
+Panier_supprimer:
+    path:     /panier/supprimer
+    defaults: { _controller: EcommerceBundle:Panier:supprimer }
+
+Panier_update:
+    path:     /panier/update
+    defaults: { _controller: EcommerceBundle:Panier:update }
+
+
+
+
 
 
 
