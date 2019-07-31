@@ -21,10 +21,20 @@ class DefaultController extends Controller
         if(!$session->has('panier'))
             $session->set('panier', array());
 
+        if(!$session->has('favorie'))
+            $session->set('favorie', array());
+
         $em = $this->getDoctrine()->getManager();
         $produitpanier = $em->getRepository("EcommerceBundle:Produit")->findArray(array_keys(($session->get('panier'))));
+        $produitfavorie = $em->getRepository("EcommerceBundle:Produit")->findArray(array_keys(($session->get('favorie'))));
 
-        return $this->render('@Ecommerce/Default/home.html.twig' , ["produits" => $produits , "categories" => $categories , "produitspanier" => $produitpanier ,  "panier" => $session->get('panier')]);
+        //$favorie[id_produit] = 1
+
+        $favorie = $session->get('favorie');
+
+        $session->set('favorie' , $favorie);
+
+        return $this->render('@Ecommerce/Default/home.html.twig' , ["produits" => $produits , "categories" => $categories , "produitspanier" => $produitpanier ,  "panier" => $session->get('panier') , "produitsfavorie" => $produitfavorie ,  "favorie" => $session->get('favorie')]);
     }
 
     public function dashboardAction()

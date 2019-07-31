@@ -39,11 +39,16 @@ class PanierController extends Controller
         if(!$session->has('panier'))
             $session->set('panier', array());
 
+        if(!$session->has('favorie'))
+            $session->set('favorie', array());
+
         $em = $this->getDoctrine()->getManager();
         $produitpanier = $em->getRepository("EcommerceBundle:Produit")->findArray(array_keys(($session->get('panier'))));
+        $produitfavorie = $em->getRepository("EcommerceBundle:Produit")->findArray(array_keys(($session->get('favorie'))));
+
 
         $router = $this->container->get('router');
-        return $this->render('@Ecommerce/Panier/afficher.html.twig', [ "produitspanier" => $produitpanier ,  "panier" => $session->get('panier')]);
+        return $this->render('@Ecommerce/Panier/afficher.html.twig', [ "produitspanier" => $produitpanier ,  "panier" => $session->get('panier') , "produitsfavorie" => $produitfavorie ,  "favorie" => $session->get('favorie')]);
 
     }
 

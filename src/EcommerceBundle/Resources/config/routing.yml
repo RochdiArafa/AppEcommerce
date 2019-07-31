@@ -110,6 +110,18 @@ Panier_update:
     path:     /panier/update
     defaults: { _controller: EcommerceBundle:Panier:update }
 
+Favorie_ajouter:
+    path:     /favorie/ajouter
+    defaults: { _controller: EcommerceBundle:Favorie:ajouter }
+
+Favorie_afficher:
+    path:     /favorie/afficher
+    defaults: { _controller: EcommerceBundle:Favorie:afficher }
+
+Favorie_supprimer:
+    path:     /favorie/supprimer
+    defaults: { _controller: EcommerceBundle:Favorie:supprimer }
+
 
 
 

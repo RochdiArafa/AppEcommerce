@@ -13,23 +13,22 @@ class FavorieController extends Controller
     public function ajouterAction(Request $request)
     {
         $id=$request->get("id");
-        $qte=$request->get("qte");
 
         $session = $request->getSession();
 
-        if(!$session->has('panier'))
-            $session->set('panier', array());
+        if(!$session->has('favorie'))
+            $session->set('favorie', array());
 
-        //$panier[id_produit] = quantité
+        //$favorie[id_produit] = 1
 
-        $panier = $session->get('panier');
+        $favorie = $session->get('favorie');
 
-        $panier[$id] = $qte;
+        $favorie[$id] = 1;
 
-        $session->set('panier' , $panier);
+        $session->set('favorie' , $favorie);
 
         $router = $this->container->get('router');
-        return new RedirectResponse($router->generate('Produit_consulter' , ["id" => $id ]));
+        return new RedirectResponse($router->generate('ecommerce_homepage'));
     }
 
     public function afficherAction(Request $request)
@@ -39,56 +38,36 @@ class FavorieController extends Controller
         if(!$session->has('panier'))
             $session->set('panier', array());
 
+        if(!$session->has('favorie'))
+            $session->set('favorie', array());
+
         $em = $this->getDoctrine()->getManager();
         $produitpanier = $em->getRepository("EcommerceBundle:Produit")->findArray(array_keys(($session->get('panier'))));
+        $produitfavorie = $em->getRepository("EcommerceBundle:Produit")->findArray(array_keys(($session->get('favorie'))));
 
         $router = $this->container->get('router');
-        return $this->render('@Ecommerce/Panier/afficher.html.twig', [ "produitspanier" => $produitpanier ,  "panier" => $session->get('panier')]);
+        return $this->render('@Ecommerce/Favorie/afficher.html.twig', [ "produitspanier" => $produitpanier ,  "panier" => $session->get('panier') , "produitsfavorie" => $produitfavorie ,  "favorie" => $session->get('favorie')]);
 
     }
 
     public function supprimerAction(Request $request)
     {
         $session = $request->getSession();
-        $panier = $session->get('panier');
+        $favorie = $session->get('favorie');
 
 
         //recuperer id du produit à supprimer
         $id = $request->get('id');
 
-        if (array_key_exists($id,$panier)){
-            unset($panier[$id]);
-            $session->set('panier' , $panier);
+        if (array_key_exists($id,$favorie)){
+            unset($favorie[$id]);
+            $session->set('favorie' , $favorie);
         }
 
         $router = $this->container->get('router');
 
-        return new RedirectResponse($router->generate("Panier_afficher"), 307);
+        return new RedirectResponse($router->generate("Favorie_afficher"), 307);
 
-    }
-
-    public function updateAction(Request $request)
-    {
-
-        $session = $request->getSession();
-
-        if(!$session->has('panier'))
-            $session->set('panier', array());
-
-        $em = $this->getDoctrine()->getManager();
-        $produitpanier = $em->getRepository("EcommerceBundle:Produit")->findArray(array_keys(($session->get('panier'))));
-
-        $panier = $session->get('panier');
-
-        foreach ($produitpanier as $p){
-            $qte=$request->get("qte".$p->getId());
-            $panier[$p->getId()] = $qte;
-
-            $session->set('panier' , $panier);
-        }
-
-        $router = $this->container->get('router');
-        return new RedirectResponse($router->generate("Panier_afficher"), 307);
     }
 
 }
