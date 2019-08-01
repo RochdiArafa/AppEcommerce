@@ -36,7 +36,7 @@ class CategorieController extends Controller
         $categories = $em->getRepository("EcommerceBundle:Categorie")->findAll();
 
 
-        return $this->render('@Ecommerce\Categorie\list.html.twig' , ["categories" => $categories]);
+        return $this->render('@Ecommerce\Categorie\list.html.twig' , [ "user" => $this->getUser(), "categories" => $categories]);
     }
 
     public function supprimerAction(Request $request)
@@ -61,7 +61,7 @@ class CategorieController extends Controller
 
     public function goajouterAction(Request $request)
     {
-        return $this->render('@Ecommerce\Categorie\ajouter.html.twig' );
+        return $this->render('@Ecommerce\Categorie\ajouter.html.twig' , ["user" => $this->getUser()] );
 
     }
 
@@ -90,7 +90,7 @@ class CategorieController extends Controller
         $em = $this->getDoctrine()->getManager();
         $categorie = $em->getRepository("EcommerceBundle:Categorie")->find($id);
 
-        return $this->render('@Ecommerce/Categorie/modifier.html.twig' , ["categorie" => $categorie]);
+        return $this->render('@Ecommerce/Categorie/modifier.html.twig' , ["user" => $this->getUser() , "categorie" => $categorie]);
 
     }
 

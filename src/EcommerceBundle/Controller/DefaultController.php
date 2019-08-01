@@ -34,11 +34,11 @@ class DefaultController extends Controller
 
         $session->set('favorie' , $favorie);
 
-        return $this->render('@Ecommerce/Default/home.html.twig' , ["produits" => $produits , "categories" => $categories , "produitspanier" => $produitpanier ,  "panier" => $session->get('panier') , "produitsfavorie" => $produitfavorie ,  "favorie" => $session->get('favorie')]);
+        return $this->render('@Ecommerce/Default/home.html.twig' , ["user" => $this->getUser() ,"produits" => $produits , "categories" => $categories , "produitspanier" => $produitpanier ,  "panier" => $session->get('panier') , "produitsfavorie" => $produitfavorie ,  "favorie" => $session->get('favorie')]);
     }
 
     public function dashboardAction()
     {
-        return $this->render('@Ecommerce/Default/dashboard.html.twig');
+        return $this->render('@Ecommerce/Default/dashboard.html.twig', ["user" => $this->getUser()]);
     }
 }

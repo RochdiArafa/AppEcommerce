@@ -131,6 +131,18 @@ Notification_supprimer:
     path:     /admin/dashboard/notification/supprimer
     defaults: { _controller: EcommerceBundle:Notification:supprimer }
 
+user_update:
+    path:     /user/modifier
+    defaults: { _controller: AppBundle:User:update }
+
+user_goupdate:
+    path:     /user/gomodifier
+    defaults: { _controller: AppBundle:User:goupdate }
+
+user_consulter:
+    path:     /user/consulter
+    defaults: { _controller: AppBundle:User:consulter }
+
 
 
 

@@ -29,7 +29,7 @@ class PanierController extends Controller
         $session->set('panier' , $panier);
 
         $router = $this->container->get('router');
-        return new RedirectResponse($router->generate('Produit_consulter' , ["id" => $id ]));
+        return new RedirectResponse($router->generate('Produit_consulter' , ["id" => $id ,"user" => $this->getUser()]));
     }
 
     public function afficherAction(Request $request)
@@ -48,7 +48,7 @@ class PanierController extends Controller
 
 
         $router = $this->container->get('router');
-        return $this->render('@Ecommerce/Panier/afficher.html.twig', [ "produitspanier" => $produitpanier ,  "panier" => $session->get('panier') , "produitsfavorie" => $produitfavorie ,  "favorie" => $session->get('favorie')]);
+        return $this->render('@Ecommerce/Panier/afficher.html.twig', [ "user" => $this->getUser() , "produitspanier" => $produitpanier ,  "panier" => $session->get('panier') , "produitsfavorie" => $produitfavorie ,  "favorie" => $session->get('favorie')]);
 
     }
 

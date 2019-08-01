@@ -1,0 +1,51 @@
+{% extends 'home.html.twig' %}
+
+{% block content %}
+    <section class="bg0 p-t-104 p-b-116">
+        <div class="container">
+            <h4 class="mtext-105 cl2 txt-center p-b-30">
+                Account
+            </h4>
+            <form action="{{ path("user_update") }}"  method="post">
+                <div class="flex-w flex-tr">
+                    <div class="size-210 bor10 p-lr-70 p-t-55 p-b-70 p-lr-15-lg w-full-md">
+
+                        <div class="bor8 m-b-20 how-pos4-parent" style="margin-top: -22px;">
+                            <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="nom" placeholder="{{ app.user.nom }}" value="{{ app.user.nom }}">
+                            <img class="how-pos4 pointer-none" src="{{ asset('Front_office/images/icons/user.jpg') }}" alt="ICON">
+                        </div>
+
+                        <div class="bor8 m-b-20 how-pos4-parent">
+                            <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="prenom" placeholder="{{ app.user.prenom }}" value="{{ app.user.prenom }}">
+                            <img class="how-pos4 pointer-none" src="{{ asset('Front_office/images/icons/user.jpg') }}" alt="ICON">
+                        </div>
+
+                        <div class="bor8 m-b-20 how-pos4-parent">
+                            <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="email" placeholder="{{ app.user.email }}" value="{{ app.user.email }}">
+                            <img class="how-pos4 pointer-none" src="{{ asset('Front_office/images/icons/icon-email.png') }}" alt="ICON">
+                        </div>
+
+                        <div class="bor8 m-b-20 how-pos4-parent">
+                            <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="adresse" placeholder="{{ app.user.adresse }}" value="{{ app.user.adresse }}">
+                            <img class="how-pos4 pointer-none" src="{{ asset('Front_office/images/icons/marquer.png') }}" alt="ICON">
+                        </div>
+
+                    </div>
+
+                    <div class="size-210 bor10 flex-w flex-col-m p-lr-93 p-tb-30 p-lr-15-lg w-full-md">
+                        <div class="flex-w w-full p-b-42">
+
+                            <div class="bor8 m-b-20 how-pos4-parent">
+                                <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="tel" placeholder="{{ app.user.tel }}" value="{{ app.user.tel }}">
+                                <img class="how-pos4 pointer-none" src="{{ asset('Front_office/images/icons/tel.png') }}" alt="ICON">
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+
+{% endblock content %}

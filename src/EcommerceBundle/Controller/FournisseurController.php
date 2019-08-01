@@ -38,7 +38,7 @@ class FournisseurController extends Controller
         $fournisseurs = $em->getRepository("EcommerceBundle:Fournisseur")->findAll();
 
 
-        return $this->render('@Ecommerce\Fournisseur\list.html.twig' , ["fournisseurs" => $fournisseurs]);
+        return $this->render('@Ecommerce\Fournisseur\list.html.twig' , ["user" => $this->getUser() , "fournisseurs" => $fournisseurs]);
     }
 
     public function supprimerAction(Request $request)
@@ -63,7 +63,7 @@ class FournisseurController extends Controller
 
     public function goajouterAction(Request $request)
     {
-        return $this->render('@Ecommerce\Fournisseur\ajouter.html.twig' );
+        return $this->render('@Ecommerce\Fournisseur\ajouter.html.twig' , ["user" => $this->getUser()] );
 
     }
 
@@ -91,7 +91,7 @@ class FournisseurController extends Controller
         $em = $this->getDoctrine()->getManager();
         $fournisseur = $em->getRepository("EcommerceBundle:Fournisseur")->find($id);
 
-        return $this->render('@Ecommerce/Fournisseur/modifier.html.twig' , ["fournisseur" => $fournisseur]);
+        return $this->render('@Ecommerce/Fournisseur/modifier.html.twig' , [ "user" => $this->getUser() , "fournisseur" => $fournisseur]);
 
     }
 

@@ -46,7 +46,7 @@ class FavorieController extends Controller
         $produitfavorie = $em->getRepository("EcommerceBundle:Produit")->findArray(array_keys(($session->get('favorie'))));
 
         $router = $this->container->get('router');
-        return $this->render('@Ecommerce/Favorie/afficher.html.twig', [ "produitspanier" => $produitpanier ,  "panier" => $session->get('panier') , "produitsfavorie" => $produitfavorie ,  "favorie" => $session->get('favorie')]);
+        return $this->render('@Ecommerce/Favorie/afficher.html.twig', [ "user" => $this->getUser(), "produitspanier" => $produitpanier ,  "panier" => $session->get('panier') , "produitsfavorie" => $produitfavorie ,  "favorie" => $session->get('favorie')]);
 
     }
 

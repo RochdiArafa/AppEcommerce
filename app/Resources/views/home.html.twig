@@ -53,21 +53,11 @@
                     </div>
 
                     <div class="right-top-bar flex-w h-full">
-                        <a href="#" class="flex-c-m trans-04 p-lr-25">
-                            Help & FAQs
-                        </a>
-
-                        <a href="#" class="flex-c-m trans-04 p-lr-25">
-                            My Account
-                        </a>
-
-                        <a href="#" class="flex-c-m trans-04 p-lr-25">
-                            EN
-                        </a>
-
-                        <a href="#" class="flex-c-m trans-04 p-lr-25">
-                            USD
-                        </a>
+                        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                            <a href="#" class="flex-c-m trans-04 p-lr-25">
+                                {{ app.user.nom }} {{ app.user.prenom  }}
+                            </a>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -119,9 +109,9 @@
                         </a>
                         <ul role="menu" class="dropdown-header-top author-log dropdown-menu animated zoomIn">
                             {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                                <li><a href="{{ path('fos_user_profile_show')}}"><span class="edu-icon edu-home-admin author-log-ic"></span>My Account</a>
+                                <li><a href="{{ path('user_consulter')}}"><span class="edu-icon edu-home-admin author-log-ic"></span>My Account</a>
                                 </li>
-                                <li><a href="{{ path('fos_user_profile_edit')}}" ><span class="edu-icon edu-user-rounded author-log-ic"></span>Edit</a>
+                                <li><a href="{{ path('user_goupdate')}}" ><span class="edu-icon edu-user-rounded author-log-ic"></span>Edit</a>
                                 </li>
                                 <li><a href="{{ path('fos_user_security_logout')}}"><span class="edu-icon edu-locked author-log-ic"></span>Log Out</a>
                                 </li>
@@ -199,20 +189,9 @@
 
                 <li>
                     <div class="right-top-bar flex-w h-full">
-                        <a href="#" class="flex-c-m p-lr-10 trans-04">
-                            Help & FAQs
-                        </a>
 
                         <a href="#" class="flex-c-m p-lr-10 trans-04">
                             My Account
-                        </a>
-
-                        <a href="#" class="flex-c-m p-lr-10 trans-04">
-                            EN
-                        </a>
-
-                        <a href="#" class="flex-c-m p-lr-10 trans-04">
-                            USD
                         </a>
                     </div>
                 </li>

@@ -38,7 +38,7 @@ class ProduitController extends Controller
         $favorie = $session->get('favorie');
 
         $session->set('favorie' , $favorie);
-        return $this->render('@Ecommerce/Produit/consulter.html.twig' , ["produit" => $produit , "aviss" => $aviss , "produitspanier" => $produitpanier ,  "panier" => $session->get('panier') , "produitsfavorie" => $produitfavorie ,  "favorie" => $session->get('favorie')]);
+        return $this->render('@Ecommerce/Produit/consulter.html.twig' , [ "user" => $this->getUser(), "produit" => $produit , "aviss" => $aviss , "produitspanier" => $produitpanier ,  "panier" => $session->get('panier') , "produitsfavorie" => $produitfavorie ,  "favorie" => $session->get('favorie')]);
     }
 
     public function ajouterAction(Request $request)
@@ -84,7 +84,7 @@ class ProduitController extends Controller
         $produits = $em->getRepository("EcommerceBundle:Produit")->findAll();
 
 
-        return $this->render('@Ecommerce\Produit\list_dashboard.html.twig' , ["produits" => $produits ]);
+        return $this->render('@Ecommerce\Produit\list_dashboard.html.twig' , ["produits" => $produits , "user" => $this->getUser()]);
     }
 
 
@@ -115,7 +115,7 @@ class ProduitController extends Controller
         $categories = $em->getRepository("EcommerceBundle:Categorie")->findAll();
         $fournisseurs = $em->getRepository("EcommerceBundle:Fournisseur")->findAll();
 
-        return $this->render('@Ecommerce\Produit\ajouter.html.twig' , ["categories" => $categories , "fournisseurs" => $fournisseurs  ] );
+        return $this->render('@Ecommerce\Produit\ajouter.html.twig' , ["user" => $this->getUser() , "categories" => $categories , "fournisseurs" => $fournisseurs  ] );
 
     }
 
@@ -165,7 +165,7 @@ class ProduitController extends Controller
         $categories = $em->getRepository("EcommerceBundle:Categorie")->findAll();
         $fournisseurs = $em->getRepository("EcommerceBundle:Fournisseur")->findAll();
 
-        return $this->render('@Ecommerce\Produit\modifier.html.twig' , ["produit" => $produit,"categories" => $categories , "fournisseurs" => $fournisseurs  ] );
+        return $this->render('@Ecommerce\Produit\modifier.html.twig' , ["user" => $this->getUser() ,"produit" => $produit,"categories" => $categories , "fournisseurs" => $fournisseurs  ] );
     }
 
     public function afficherFrontAction( Request $request)
@@ -197,6 +197,6 @@ class ProduitController extends Controller
 
         $session->set('favorie' , $favorie);
 
-        return $this->render('@Ecommerce/Produit/afficher_front.html.twig' , ["produits" => $produits , "categories" => $categories , "produitspanier" => $produitpanier ,  "panier" => $session->get('panier') , "produitsfavorie" => $produitfavorie ,  "favorie" => $session->get('favorie')]);
+        return $this->render('@Ecommerce/Produit/afficher_front.html.twig' , ["user" => $this->getUser() ,"produits" => $produits , "categories" => $categories , "produitspanier" => $produitpanier ,  "panier" => $session->get('panier') , "produitsfavorie" => $produitfavorie ,  "favorie" => $session->get('favorie')]);
     }
 }
