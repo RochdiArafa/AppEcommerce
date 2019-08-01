@@ -26,9 +26,19 @@ class ProduitController extends Controller
         if(!$session->has('panier'))
             $session->set('panier', array());
 
+        if(!$session->has('favorie'))
+            $session->set('favorie', array());
+
         $em = $this->getDoctrine()->getManager();
         $produitpanier = $em->getRepository("EcommerceBundle:Produit")->findArray(array_keys(($session->get('panier'))));
-        return $this->render('@Ecommerce/Produit/consulter.html.twig' , ["produit" => $produit , "aviss" => $aviss , "produitspanier" => $produitpanier ,  "panier" => $session->get('panier')]);
+        $produitfavorie = $em->getRepository("EcommerceBundle:Produit")->findArray(array_keys(($session->get('favorie'))));
+
+        //$favorie[id_produit] = 1
+
+        $favorie = $session->get('favorie');
+
+        $session->set('favorie' , $favorie);
+        return $this->render('@Ecommerce/Produit/consulter.html.twig' , ["produit" => $produit , "aviss" => $aviss , "produitspanier" => $produitpanier ,  "panier" => $session->get('panier') , "produitsfavorie" => $produitfavorie ,  "favorie" => $session->get('favorie')]);
     }
 
     public function ajouterAction(Request $request)

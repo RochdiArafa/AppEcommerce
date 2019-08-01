@@ -122,6 +122,16 @@ Favorie_supprimer:
     path:     /favorie/supprimer
     defaults: { _controller: EcommerceBundle:Favorie:supprimer }
 
+notification_user:
+    path:     /notification/user
+    defaults: { _controller: EcommerceBundle:Notification:list }
+    methods: [POST]
+
+Notification_supprimer:
+    path:     /admin/dashboard/notification/supprimer
+    defaults: { _controller: EcommerceBundle:Notification:supprimer }
+
+
 
 
 
