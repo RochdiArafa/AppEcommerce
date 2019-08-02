@@ -76,13 +76,17 @@ class ProduitController extends Controller
 
     }
 
-    public function afficherAction()
+    public function afficherAction(Request $request)
     {
         //afficher tous les produits
 
         $em = $this->getDoctrine()->getManager();
-        $produits = $em->getRepository("EcommerceBundle:Produit")->findAll();
-
+        $listproduits = $em->getRepository("EcommerceBundle:Produit")->findAll();
+        $produits  = $this->get('knp_paginator')->paginate(
+            $listproduits,
+            $request->query->get('page', 1)/*le numéro de la page à afficher*/,
+            8/*nbre d'éléments par page*/
+        );
 
         return $this->render('@Ecommerce\Produit\list_dashboard.html.twig' , ["produits" => $produits , "user" => $this->getUser()]);
     }
