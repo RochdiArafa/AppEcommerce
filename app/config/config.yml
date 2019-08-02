@@ -100,3 +100,7 @@ knp_paginator:
         pagination: 'twitter_bootstrap_v3_pagination.html.twig'
         sortable: 'KnpPaginatorBundle:Pagination:sortable_link.html.twig'
 
+
+cmen_google_charts:
+    version: "current"
+

@@ -20,6 +20,8 @@ class AppKernel extends Kernel
             new EcommerceBundle\EcommerceBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+            new CMEN\GoogleChartsBundle\CMENGoogleChartsBundle(),
+
 
         ];
 
