@@ -148,6 +148,24 @@ Admin_dashboard_statique:
     path:     /admin/dashboard/statique
     defaults: { _controller: EcommerceBundle:Produit:statique }
 
+Commande_list_dashboard:
+    path:     /admin/dashboard/commandes/afficher
+    defaults: { _controller: EcommerceBundle:Commandes:afficher }
+
+Commande_consulter_dashboard:
+    path:     /admin/dashboard/commandes/consulter
+    defaults: { _controller: EcommerceBundle:Commandes:consulter }
+
+Commande_ajouter:
+    path:     /commandes/ajouter
+    defaults: { _controller: EcommerceBundle:Commandes:ajouter }
+
+LigneCommande_supprimer:
+    path:     /admin/dashboard/lignecommandes/supprimer
+    defaults: { _controller: EcommerceBundle:Commandes:supprimer }
+
+
+
 
 
 

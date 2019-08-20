@@ -42,6 +42,13 @@ class Commandes
      */
     private $User;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="shippingdetaills", type="string", length=255)
+     */
+    private $shippingdetaills;
+
 
     /**
      * Get id
@@ -124,5 +131,29 @@ class Commandes
     public function getUser()
     {
         return $this->User;
+    }
+
+    /**
+     * Set shippingdetaills
+     *
+     * @param string $shippingdetaills
+     *
+     * @return Commandes
+     */
+    public function setShippingdetaills($shippingdetaills)
+    {
+        $this->shippingdetaills = $shippingdetaills;
+
+        return $this;
+    }
+
+    /**
+     * Get shippingdetaills
+     *
+     * @return string
+     */
+    public function getShippingdetaills()
+    {
+        return $this->shippingdetaills;
     }
 }

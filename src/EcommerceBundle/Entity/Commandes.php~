@@ -42,6 +42,13 @@ class Commandes
      */
     private $User;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="shippingdetaills", type="string", length=255)
+     */
+    private $shippingdetaills;
+
 
     /**
      * Get id
@@ -77,5 +84,52 @@ class Commandes
     {
         return $this->paye;
     }
-}
 
+    /**
+     * Set datecom
+     *
+     * @param \DateTime $datecom
+     *
+     * @return Commandes
+     */
+    public function setDatecom($datecom)
+    {
+        $this->datecom = $datecom;
+
+        return $this;
+    }
+
+    /**
+     * Get datecom
+     *
+     * @return \DateTime
+     */
+    public function getDatecom()
+    {
+        return $this->datecom;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \AppBundle\Entity\User $user
+     *
+     * @return Commandes
+     */
+    public function setUser(\AppBundle\Entity\User $user = null)
+    {
+        $this->User = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \AppBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->User;
+    }
+}

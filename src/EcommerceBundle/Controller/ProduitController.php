@@ -129,7 +129,7 @@ class ProduitController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
-        //ajouter nouveau produit
+        //recuperer le produit à modifier
         $produit = $em->getRepository("EcommerceBundle:Produit")->find($request->get("id"));
 
         $produit->setNom($request->get("nom"));
@@ -210,21 +210,35 @@ class ProduitController extends Controller
         $pieChart = new PieChart();
         $em= $this->getDoctrine();
         $produits = $em->getRepository("EcommerceBundle:Produit")->findAll();
-        $totalProduit =0;
+        $lignecommandes = $em->getRepository("EcommerceBundle:lignecommande")->findAll();
+
+        $totalStock =0;
         foreach($produits as $produit) {
-            $totalProduit=$totalProduit+1;
+            $totalStock=$totalStock + $produit->getStock();
         }
+
+        $totalvendue = 0;
+        foreach($lignecommandes as $lignecommande) {
+            $totalvendue=$totalvendue + $lignecommande->getQuantite();
+        }
+
         $data= array();
         $stat=['classe', 'nbEtudiant'];
         $nb=0;
         array_push($data,$stat);
-        foreach($produits as $produit) {
-            $stat=array();
-            array_push($stat,$produit->getNom(),((20) *100)/$totalProduit);
-            $nb=(20 *100)/$totalProduit;
-            $stat=[$produit->getNom(),$nb];
-            array_push($data,$stat);
-        }
+
+        $stat=array();
+        array_push($stat,"All Stock",($totalStock *100)/($totalStock + $totalvendue));
+        $nb=($totalStock *100)/($totalStock + $totalvendue);
+        $stat=["All Stock",$nb];
+        array_push($data,$stat);
+
+        $stat=array();
+        array_push($stat,"Sell",($totalvendue *100)/($totalStock + $totalvendue));
+        $nb=($totalvendue *100)/($totalStock + $totalvendue);
+        $stat=["Sell",$nb];
+        array_push($data,$stat);
+
 
         $pieChart->getData()->setArrayToDataTable(
             $data
