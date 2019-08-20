@@ -3,6 +3,7 @@
 namespace EcommerceBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
@@ -39,6 +40,7 @@ class DefaultController extends Controller
 
     public function dashboardAction()
     {
-        return $this->render('@Ecommerce/Default/dashboard.html.twig', ["user" => $this->getUser()]);
+        $router = $this->container->get('router');
+        return new RedirectResponse($router->generate('Admin_dashboard_statique'));
     }
 }

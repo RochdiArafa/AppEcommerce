@@ -144,6 +144,10 @@ user_consulter:
     defaults: { _controller: AppBundle:User:consulter }
 
 
+Admin_dashboard_statique:
+    path:     /admin/dashboard/statique
+    defaults: { _controller: EcommerceBundle:Produit:statique }
+
 
 
 

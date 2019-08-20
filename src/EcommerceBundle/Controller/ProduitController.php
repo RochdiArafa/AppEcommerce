@@ -2,6 +2,7 @@
 
 namespace EcommerceBundle\Controller;
 
+use CMEN\GoogleChartsBundle\GoogleCharts\Charts\PieChart;
 use EcommerceBundle\Entity\Produit;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -203,4 +204,40 @@ class ProduitController extends Controller
 
         return $this->render('@Ecommerce/Produit/afficher_front.html.twig' , ["user" => $this->getUser() ,"produits" => $produits , "categories" => $categories , "produitspanier" => $produitpanier ,  "panier" => $session->get('panier') , "produitsfavorie" => $produitfavorie ,  "favorie" => $session->get('favorie')]);
     }
+
+    public function statiqueAction()
+    {
+        $pieChart = new PieChart();
+        $em= $this->getDoctrine();
+        $produits = $em->getRepository("EcommerceBundle:Produit")->findAll();
+        $totalProduit =0;
+        foreach($produits as $produit) {
+            $totalProduit=$totalProduit+1;
+        }
+        $data= array();
+        $stat=['classe', 'nbEtudiant'];
+        $nb=0;
+        array_push($data,$stat);
+        foreach($produits as $produit) {
+            $stat=array();
+            array_push($stat,$produit->getNom(),((20) *100)/$totalProduit);
+            $nb=(20 *100)/$totalProduit;
+            $stat=[$produit->getNom(),$nb];
+            array_push($data,$stat);
+        }
+
+        $pieChart->getData()->setArrayToDataTable(
+            $data
+        );
+        $pieChart->getOptions()->setTitle('Pourcentages des produit vendu par rapport à tous les produits');
+        $pieChart->getOptions()->setHeight(500);
+        $pieChart->getOptions()->setWidth(900);
+        $pieChart->getOptions()->getTitleTextStyle()->setBold(true);
+        $pieChart->getOptions()->getTitleTextStyle()->setColor('#009900');
+        $pieChart->getOptions()->getTitleTextStyle()->setItalic(true);
+        $pieChart->getOptions()->getTitleTextStyle()->setFontName('Arial');
+        $pieChart->getOptions()->getTitleTextStyle()->setFontSize(20);
+        return $this->render('@Ecommerce/Default/dashboard.html.twig', array('piechart' => $pieChart , "user" => $this->getUser()));
+    }
+
 }
