@@ -22,6 +22,17 @@ class FournisseurController extends Controller
         $fournisseur->setTelephone($request->get("telephone"));
         $fournisseur->setLogo("logo");
 
+        $validator = $this->get('validator');
+        $errors = $validator->validate($fournisseur);
+
+        $errorsString = null;
+
+        if (count($errors) > 0) {
+            $errorsString = (string) $errors;
+
+            return $this->render('@Ecommerce\Fournisseur\ajouter.html.twig' , ["user" => $this->getUser() , "error" => "ne doit pas etre vide !"] );
+        }
+
         $em->persist($fournisseur);
         $em->flush();
 
@@ -63,7 +74,7 @@ class FournisseurController extends Controller
 
     public function goajouterAction(Request $request)
     {
-        return $this->render('@Ecommerce\Fournisseur\ajouter.html.twig' , ["user" => $this->getUser()] );
+        return $this->render('@Ecommerce\Fournisseur\ajouter.html.twig' , ["user" => $this->getUser() , "error" => ""] );
 
     }
 

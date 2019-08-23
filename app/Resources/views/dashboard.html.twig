@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- favicon
 		============================================ -->
-    <link rel="shortcut icon" type="{{  asset('Admin_Dashboard/image/x-icon')}}" href="img/favicon.ico">
+    <link rel="icon" type="image/png" href="{{ asset('Front_office/images/icons/favicon.png')}}"/>
     <!-- Google Fonts
 		============================================ -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900" rel="stylesheet">
@@ -74,8 +74,10 @@
 <div class="left-sidebar-pro">
     <nav id="sidebar" class="">
         <div class="sidebar-header">
-            <a href="index.html"><img class="main-logo" src="{{ asset('Admin_Dashboard/img/logo/logo.png')}}" alt="" /></a>
-            <strong><a href="index.html"><img src="{{ asset('Admin_Dashboard/img/logo/logosn.png')}}" alt="" /></a></strong>
+            <br>
+            <a href="{{ path("dashboard_admin")}}"><img class="main-logo" src="{{ asset('Admin_Dashboard/img/logo/logo.png')}}" alt="" /></a> <br>
+            <strong><a href="{{ path("dashboard_admin")}}"><img src="{{ asset('Admin_Dashboard/img/logo/logosn.png')}}" alt="" /></a></strong>
+            <br>
         </div>
         <div class="left-custom-menu-adp-wrap comment-scrollbar">
             <nav class="sidebar-nav left-sidebar-menu-pro">
@@ -83,6 +85,11 @@
                     <li>
                         <a title="Landing Page" href="{{ path("dashboard_admin")}}" aria-expanded="false"><span class="educate-icon educate-event icon-wrap sub-icon-mg" aria-hidden="true"></span> <span class="mini-click-non">Dashboard</span></a>
                     </li>
+
+                    <li>
+                        <a title="Landing Page" href="{{ path("ecommerce_homepage")}}" aria-expanded="false"><span class="educate-icon educate-event icon-wrap sub-icon-mg" aria-hidden="true"></span> <span class="mini-click-non">Shop</span></a>
+                    </li>
+
                     <li>
                         <a class="has-arrow" href="#" aria-expanded="false"><span class="educate-icon educate-professor icon-wrap"></span> <span class="mini-click-non">Produit</span></a>
                         <ul class="submenu-angle" aria-expanded="false">
@@ -142,12 +149,6 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-7 col-sm-6 col-xs-12">
-                                    <div class="header-top-menu tabl-d-n">
-                                        <ul class="nav navbar-nav mai-top-nav">
-                                            <li class="nav-item"><a href="{{ path('ecommerce_homepage')}}" class="nav-link">Boutique</a>
-                                            </li>
-                                        </ul>
-                                    </div>
                                 </div>
                                 <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
                                     <div class="header-right-info">
@@ -170,7 +171,7 @@
                                             </li>
                                             <li class="nav-item">
                                                 <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
-                                                    <img src="{{ asset('Admin_Dashboard/img/product/pro4.jpg')}}" alt="" />
+                                                    <img src=" {{ asset('image/user/'~user.avatar)}}" alt="" />
                                                     <span class="admin-name">{{ user.nom }} {{ user.prenom }}</span>
                                                     <i class="fa fa-angle-down edu-icon edu-down-arrow"></i>
                                                 </a>

@@ -18,7 +18,7 @@
                                 </tr>
                                 {% for lignecommande in lignecommandes %}
                                     <tr>
-                                        <td> <img src="{{ asset('{{ lignecommande.Produit.image }}') }}" />  </td>
+                                        <td>  <img src=" {{ asset('Image/produit/'~lignecommande.Produit.image)}}" alt="IMG-PRODUCT">  </td>
                                         <td> {{ lignecommande.Produit.nom }}  </td>
                                         <td> {{ lignecommande.quantite }} </td>
                                         {% set prixTotal = lignecommande.quantite *  lignecommande.Produit.prix %}

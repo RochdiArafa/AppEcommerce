@@ -23,7 +23,7 @@
             <div class="row">
                 <div class="m-l-25 m-r--38 m-lr-0-xl">
                     <div class="wrap-table-shopping-cart">
-                        <table class="table-shopping-cart" style="text-align: center">
+                        <table class="table-shopping-cart" style="text-align: center; margin: 0 auto;">
                             <tr class="table_head">
                                 <th class="column-1">Image</th>
                                 <th class="column-2">Nom</th>
@@ -34,7 +34,7 @@
                             {% for lignecommande in lignecommandes %}
                                 <form action="{{ path("LigneCommande_update_quantite_home" ,{'id_prod': lignecommande.Produit.id , 'id_com': lignecommande.Commandes.id}  ) }}"  method="post">
                                 <tr>
-                                    <td> <img src="{{ asset('{{ lignecommande.Produit.image }}') }}" />  </td>
+                                    <td> <div class="how-itemcart1" style="padding-left: 20px;"> <img src=" {{ asset('Image/produit/'~lignecommande.Produit.image)}}" alt="IMG-PRODUCT">  </div></td>
                                     <td> {{ lignecommande.Produit.nom }}  </td>
                                     {% set qte =  lignecommande.quantite %}
 
@@ -61,7 +61,7 @@
                                 {% if etat == 'En cour'  %}
 
                                     <td>
-                                        <a href="{{ path("LigneCommande_supprimer",{'id_prod': lignecommande.Produit.id , 'id_com': lignecommande.Commandes.id} ) }}"> <i class="fa fa-trash" aria-hidden="true"></i></a>
+                                        <a href="{{ path("LigneCommande_supprimer",{'id': lignecommande.Produit.id} ) }}"> <i class="fa fa-trash" aria-hidden="true"></i></a>
                                         <button style="background-color: white; border-color: white; border-style: solid; color: #0a6aa1 " type="submit"> <i class="fa fa-refresh" aria-hidden="true"></i> </button>
 
                                     </td>

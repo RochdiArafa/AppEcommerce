@@ -249,7 +249,7 @@
                         <!-- Block2 -->
                         <div class="block2">
                             <div class="block2-pic hov-img0 label-new" data-label="New">
-                                <img src="{{ asset('Front_office/images/product-01.jpg')}}" alt="IMG-PRODUCT">
+                                <img src=" {{ asset('Image/produit/'~produit.image)}}" alt="IMG-PRODUCT">
 
                                 <a href="{{ path("Produit_consulter" , {'id': produit.id} ) }}" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
                                     Quick View

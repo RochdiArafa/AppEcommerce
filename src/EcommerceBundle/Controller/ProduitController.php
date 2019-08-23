@@ -54,13 +54,17 @@ class ProduitController extends Controller
 
         $categorie= $em->getRepository("EcommerceBundle:Categorie")->findBy(['nom' => $request->get("categorie")]);
 
-        $produit->setCategorie($categorie[0]);
+        if(count($categorie)!= null)
+            $produit->setCategorie($categorie[0]);
+
         $produit->setColor($request->get("color"));
         $produit->setDimensions($request->get("dimensions"));
 
         $fournisseur= $em->getRepository("EcommerceBundle:Fournisseur")->findBy(['nom' => $request->get("fournisseur")]);
 
-        $produit->setFournisseur($fournisseur[0]);
+        if(count($fournisseur)!= null)
+            $produit->setFournisseur($fournisseur[0]);
+
         $produit->setImage("image");
         $produit->setMaterials($request->get("materials"));
         $produit->setPrix($request->get("prix"));
@@ -68,6 +72,21 @@ class ProduitController extends Controller
         $produit->setStock($request->get("stock"));
         $produit->setWeight($request->get("weight"));
 
+        $validator = $this->get('validator');
+        $errors = $validator->validate($produit);
+
+        $errorsString = null;
+
+        $categories = $em->getRepository("EcommerceBundle:Categorie")->findAll();
+        $fournisseurs = $em->getRepository("EcommerceBundle:Fournisseur")->findAll();
+
+
+        if (count($errors) > 0) {
+            $errorsString = (string) $errors;
+
+            return $this->render('@Ecommerce\Produit\ajouter.html.twig' , ["user" => $this->getUser() , "categories" => $categories , "fournisseurs" => $fournisseurs , "error" => "ne doit pas etre vide !" ] );
+
+        }
 
         $em->persist($produit);
         $em->flush();
@@ -120,7 +139,7 @@ class ProduitController extends Controller
         $categories = $em->getRepository("EcommerceBundle:Categorie")->findAll();
         $fournisseurs = $em->getRepository("EcommerceBundle:Fournisseur")->findAll();
 
-        return $this->render('@Ecommerce\Produit\ajouter.html.twig' , ["user" => $this->getUser() , "categories" => $categories , "fournisseurs" => $fournisseurs  ] );
+        return $this->render('@Ecommerce\Produit\ajouter.html.twig' , ["user" => $this->getUser() , "categories" => $categories , "fournisseurs" => $fournisseurs , "error" => ""  ] );
 
     }
 

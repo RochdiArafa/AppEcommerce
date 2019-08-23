@@ -3,6 +3,8 @@
 namespace EcommerceBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * Produit
@@ -24,6 +26,7 @@ class Produit
     /**
      * @var string
      *
+     * @Assert\NotBlank
      * @ORM\Column(name="nom", type="string", length=255)
      */
     private $nom;
@@ -31,6 +34,7 @@ class Produit
     /**
      * @var string
      *
+     * @Assert\NotBlank
      * @ORM\Column(name="description", type="string", length=255)
      */
     private $description;
@@ -38,6 +42,7 @@ class Produit
     /**
      * @var float
      *
+     * @Assert\NotBlank
      * @ORM\Column(name="prix", type="float")
      */
     private $prix;
@@ -59,17 +64,20 @@ class Produit
     /**
      * @var int
      *
+     * @Assert\NotBlank
      * @ORM\Column(name="stock", type="integer")
      */
     private $stock;
 
     /**
+     * @Assert\NotBlank
      * @ORM\ManyToOne(targetEntity="EcommerceBundle\Entity\Categorie")
      * @ORM\JoinColumn(referencedColumnName="id" , onDelete="CASCADE")
      */
     private $Categorie;
 
     /**
+     * @Assert\NotBlank
      * @ORM\ManyToOne(targetEntity="EcommerceBundle\Entity\Fournisseur")
      * @ORM\JoinColumn(referencedColumnName="id" , onDelete="CASCADE")
      */
@@ -99,6 +107,7 @@ class Produit
     /**
      * @var string
      *
+     * @Assert\NotBlank
      * @ORM\Column(name="image", type="string", length=255)
      */
     private $image;

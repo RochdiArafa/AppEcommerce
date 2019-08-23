@@ -6,20 +6,33 @@ use EcommerceBundle\Entity\Categorie;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Component\HttpFoundation\Response;
+
 
 class CategorieController extends Controller
 {
 
-    public function ajouterAction(Request $request)
+    public function ajouterAction(Request $request )
     {
-
-        $em = $this->getDoctrine()->getManager();
-
-        //ajouter nouveau categorie
         $categorie = new Categorie();
+        //ajouter nouveau categorie
         $categorie->setNom($request->get("nom"));
         $categorie->setDescription($request->get("description"));
 
+        $validator = $this->get('validator');
+        $errors = $validator->validate($categorie);
+
+        $errorsString = null;
+
+        if (count($errors) > 0) {
+            $errorsString = (string) $errors;
+
+            return $this->render('@Ecommerce\Categorie\ajouter.html.twig' , ["user" => $this->getUser() , "error" => "ne doit pas etre vide !"] );
+        }
+
+        //aucune error fait l'ajout
+        $em = $this->getDoctrine()->getManager();
         $em->persist($categorie);
         $em->flush();
 
@@ -61,7 +74,7 @@ class CategorieController extends Controller
 
     public function goajouterAction(Request $request)
     {
-        return $this->render('@Ecommerce\Categorie\ajouter.html.twig' , ["user" => $this->getUser()] );
+        return $this->render('@Ecommerce\Categorie\ajouter.html.twig' , ["user" => $this->getUser() , "error" => ""] );
 
     }
 
