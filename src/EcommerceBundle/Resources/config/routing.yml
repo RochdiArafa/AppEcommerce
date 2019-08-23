@@ -180,6 +180,11 @@ LigneCommande_update_quantite_home:
     path:     /commandes/ligne/update
     defaults: { _controller: EcommerceBundle:Commandes:updateligne }
 
+Contact_home:
+    path:     /contact
+    defaults: { _controller: EcommerceBundle:Default:contact }
+
+
 
 
 

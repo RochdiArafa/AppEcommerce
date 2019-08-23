@@ -43,4 +43,27 @@ class DefaultController extends Controller
         $router = $this->container->get('router');
         return new RedirectResponse($router->generate('Admin_dashboard_statique'));
     }
+
+    public function contactAction(Request $request)
+    {
+        $session = $request->getSession();
+
+        if(!$session->has('panier'))
+            $session->set('panier', array());
+
+        if(!$session->has('favorie'))
+            $session->set('favorie', array());
+
+        $em = $this->getDoctrine()->getManager();
+        $produitpanier = $em->getRepository("EcommerceBundle:Produit")->findArray(array_keys(($session->get('panier'))));
+        $produitfavorie = $em->getRepository("EcommerceBundle:Produit")->findArray(array_keys(($session->get('favorie'))));
+
+        //$favorie[id_produit] = 1
+
+        $favorie = $session->get('favorie');
+
+        $session->set('favorie' , $favorie);
+        $router = $this->container->get('router');
+        return $this->render('@Ecommerce/Default/contact.html.twig' , ["user" => $this->getUser() , "produitspanier" => $produitpanier ,  "panier" => $session->get('panier') , "produitsfavorie" => $produitfavorie ,  "favorie" => $session->get('favorie')]);
+    }
 }

@@ -2,17 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="686cd826-495b-424e-8063-2d2d79b46786" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/EcommerceBundle/Resources/views/Commande/consulter.html.twig" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/EcommerceBundle/Resources/views/Commande/consultermylist.html.twig" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/EcommerceBundle/Resources/views/Commande/list.html.twig" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/EcommerceBundle/Resources/views/Commande/mylist.html.twig" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/EcommerceBundle/Resources/views/Default/contact.html.twig" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/dashboard.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/dashboard.html.twig" />
       <change beforePath="$PROJECT_DIR$/app/Resources/views/home.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/home.html.twig" />
-      <change beforePath="$PROJECT_DIR$/src/EcommerceBundle/Controller/CommandesController.php" afterPath="$PROJECT_DIR$/src/EcommerceBundle/Controller/CommandesController.php" />
-      <change beforePath="$PROJECT_DIR$/src/EcommerceBundle/Entity/Commandes.php" afterPath="$PROJECT_DIR$/src/EcommerceBundle/Entity/Commandes.php" />
+      <change beforePath="$PROJECT_DIR$/src/EcommerceBundle/Controller/DefaultController.php" afterPath="$PROJECT_DIR$/src/EcommerceBundle/Controller/DefaultController.php" />
       <change beforePath="$PROJECT_DIR$/src/EcommerceBundle/Resources/config/routing.yml" afterPath="$PROJECT_DIR$/src/EcommerceBundle/Resources/config/routing.yml" />
-      <change beforePath="$PROJECT_DIR$/src/EcommerceBundle/Resources/views/Produit/ajouter.html.twig" afterPath="$PROJECT_DIR$/src/EcommerceBundle/Resources/views/Produit/ajouter.html.twig" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -51,11 +45,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="home.html.twig" pinned="false" current-in-tab="true">
+      <file leaf-file-name="home.html.twig" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Resources/views/home.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="217">
-              <caret line="897" column="0" lean-forward="true" selection-start-line="897" selection-start-column="0" selection-end-line="897" selection-end-column="0" />
+            <state relative-caret-position="81">
+              <caret line="202" column="36" lean-forward="false" selection-start-line="202" selection-start-column="36" selection-end-line="202" selection-end-column="36" />
               <folding />
             </state>
           </provider>
@@ -64,9 +58,31 @@
       <file leaf-file-name="routing.yml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/EcommerceBundle/Resources/config/routing.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="124">
-              <caret line="170" column="21" lean-forward="false" selection-start-line="170" selection-start-column="0" selection-end-line="170" selection-end-column="21" />
+            <state relative-caret-position="226">
+              <caret line="182" column="12" lean-forward="false" selection-start-line="182" selection-start-column="0" selection-end-line="182" selection-end-column="12" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DefaultController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/EcommerceBundle/Controller/DefaultController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="123">
+              <caret line="46" column="50" lean-forward="false" selection-start-line="46" selection-start-column="50" selection-end-line="46" selection-end-column="50" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="contact.html.twig" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/EcommerceBundle/Resources/views/Default/contact.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="408">
+              <caret line="81" column="51" lean-forward="false" selection-start-line="81" selection-start-column="51" selection-end-line="81" selection-end-column="51" />
+              <folding>
+                <element signature="e#161#239#0#HTML" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -75,8 +91,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>for</find>
-      <find>form</find>
       <find>Subtotal</find>
       <find>zmdi zmdi-shopping-cart</find>
       <find>upda</find>
@@ -100,11 +114,13 @@
       <find>consul</find>
       <find>id_prod</find>
       <find>supprimer</find>
-      <find>consulter</find>
       <find>view</find>
       <find>ajouter</find>
       <find>Colorlib</find>
       <find>Colorlib</find>
+      <find>consulter</find>
+      <find>about</find>
+      <find>contact</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -151,7 +167,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/config/security.yml" />
         <option value="$PROJECT_DIR$/src/AppBundle/Form/ProfileFormType.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Entity/User.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Form/RegistrationFormType.php" />
@@ -185,7 +200,6 @@
         <option value="$PROJECT_DIR$/app/config/config.yml" />
         <option value="$PROJECT_DIR$/src/EcommerceBundle/Resources/views/Produit/list_dashboard.html.twig" />
         <option value="$PROJECT_DIR$/src/AppBundle/Controller/DefaultController.php" />
-        <option value="$PROJECT_DIR$/src/EcommerceBundle/Controller/DefaultController.php" />
         <option value="$PROJECT_DIR$/src/EcommerceBundle/Resources/views/Default/dashboard.html.twig" />
         <option value="$PROJECT_DIR$/src/EcommerceBundle/Entity/lignecommande.php" />
         <option value="$PROJECT_DIR$/src/EcommerceBundle/Entity/Produit.php" />
@@ -198,10 +212,12 @@
         <option value="$PROJECT_DIR$/app/Resources/views/dashboard.html.twig" />
         <option value="$PROJECT_DIR$/src/EcommerceBundle/Resources/views/Commande/list.html.twig" />
         <option value="$PROJECT_DIR$/src/EcommerceBundle/Resources/views/Commande/mylist.html.twig" />
-        <option value="$PROJECT_DIR$/src/EcommerceBundle/Resources/config/routing.yml" />
         <option value="$PROJECT_DIR$/src/EcommerceBundle/Resources/views/Commande/consultermylist.html.twig" />
         <option value="$PROJECT_DIR$/src/EcommerceBundle/Controller/CommandesController.php" />
+        <option value="$PROJECT_DIR$/src/EcommerceBundle/Resources/config/routing.yml" />
+        <option value="$PROJECT_DIR$/src/EcommerceBundle/Controller/DefaultController.php" />
         <option value="$PROJECT_DIR$/app/Resources/views/home.html.twig" />
+        <option value="$PROJECT_DIR$/src/EcommerceBundle/Resources/views/Default/contact.html.twig" />
       </list>
     </option>
   </component>
@@ -564,11 +580,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\wamp64\www\Symfony\Ecommerce\src\EcommerceBundle\Resources\views\Default" />
       <recent name="C:\wamp64\www\Symfony\Ecommerce\src\EcommerceBundle\Resources\views\Commande" />
       <recent name="C:\wamp64\www\Symfony\Ecommerce\src\EcommerceBundle\Controller" />
       <recent name="C:\wamp64\www\Symfony\Ecommerce\app\Resources\views" />
       <recent name="C:\wamp64\www\Symfony\Ecommerce\src\AppBundle\Controller" />
-      <recent name="C:\wamp64\www\Symfony\Ecommerce\vendor\friendsofsymfony\user-bundle\Resources\views\Profile" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -609,12 +625,12 @@
       <workItem from="1564913887041" duration="2405000" />
       <workItem from="1564939321427" duration="503000" />
       <workItem from="1566282677554" duration="20489000" />
-      <workItem from="1566473639979" duration="15059000" />
+      <workItem from="1566473639979" duration="15897000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="179336000" />
+    <option name="totallyTimeSpent" value="180174000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
@@ -652,13 +668,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/EcommerceBundle/Resources/views/Fournisseur/list.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="12" column="30" lean-forward="false" selection-start-line="12" selection-start-column="30" selection-end-line="12" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/EcommerceBundle/Controller/AvisController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="416">
@@ -848,14 +857,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/EcommerceBundle/Controller/DefaultController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="457">
-          <caret line="43" column="79" lean-forward="false" selection-start-line="43" selection-start-column="79" selection-end-line="43" selection-end-column="79" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/EcommerceBundle/Entity/Avis.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
@@ -993,14 +994,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/EcommerceBundle/Resources/config/routing.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="124">
-          <caret line="170" column="21" lean-forward="false" selection-start-line="170" selection-start-column="0" selection-end-line="170" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/EcommerceBundle/Controller/PanierController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
@@ -1020,11 +1013,37 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/EcommerceBundle/Resources/config/routing.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="226">
+          <caret line="182" column="12" lean-forward="false" selection-start-line="182" selection-start-column="0" selection-end-line="182" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/EcommerceBundle/Controller/DefaultController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="123">
+          <caret line="46" column="50" lean-forward="false" selection-start-line="46" selection-start-column="50" selection-end-line="46" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/Resources/views/home.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="217">
-          <caret line="897" column="0" lean-forward="true" selection-start-line="897" selection-start-column="0" selection-end-line="897" selection-end-column="0" />
+        <state relative-caret-position="81">
+          <caret line="202" column="36" lean-forward="false" selection-start-line="202" selection-start-column="36" selection-end-line="202" selection-end-column="36" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/EcommerceBundle/Resources/views/Default/contact.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="81" column="51" lean-forward="false" selection-start-line="81" selection-start-column="51" selection-end-line="81" selection-end-column="51" />
+          <folding>
+            <element signature="e#161#239#0#HTML" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
