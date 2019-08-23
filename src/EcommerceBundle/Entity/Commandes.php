@@ -49,6 +49,13 @@ class Commandes
      */
     private $shippingdetaills;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="etat", type="string", length=255)
+     */
+    private $etat;
+
 
     /**
      * Get id
@@ -155,5 +162,29 @@ class Commandes
     public function getShippingdetaills()
     {
         return $this->shippingdetaills;
+    }
+
+    /**
+     * Set etat
+     *
+     * @param string $etat
+     *
+     * @return Commandes
+     */
+    public function setEtat($etat)
+    {
+        $this->etat = $etat;
+
+        return $this;
+    }
+
+    /**
+     * Get etat
+     *
+     * @return string
+     */
+    public function getEtat()
+    {
+        return $this->etat;
     }
 }

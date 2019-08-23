@@ -1,0 +1,60 @@
+{% extends 'home.html.twig' %}
+
+{% block content %}
+    <br> <br>
+    <!-- breadcrumb -->
+    <div class="container">
+        <div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
+            <a href="index.html" class="stext-109 cl8 hov-cl1 trans-04">
+                Home
+                <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+            </a>
+
+            <span class="stext-109 cl4">
+				Commande
+			</span>
+        </div>
+    </div>
+
+
+    <!-- Shoping Cart -->
+    <div class="bg0 p-t-75 p-b-85" >
+        <div class="container">
+            <div class="row">
+                    <div class="m-l-25 m-r--38 m-lr-0-xl">
+                        <div class="wrap-table-shopping-cart">
+                            <table class="table-shopping-cart" style="text-align: center">
+                                <tr class="table_head">
+                                    <th class="column-1">Date</th>
+                                    <th class="column-2">Etat paiment</th>
+                                    <th class="column-3">Adresse</th>
+                                    <th class="column-4">Etat</th>
+                                    <th class="column-5">Actions</th>
+
+                                </tr>
+                                {% for commande in commandes %}
+
+                                    <tr class="table_row">
+                                        <td>{{ commande.datecom  | date('d/m/Y')}}</td>
+                                        {% if commande.paye == false %}
+                                            <td>Non</td>
+                                        {% else %}
+                                            <td>Oui</td>
+                                        {% endif %}
+
+                                        <td>{{ commande.shippingdetaills }}</td>
+                                        <td>{{ commande.etat}}</td>
+                                        <td>
+                                            <a href="{{ path("Commande_consulter_home",{'id': commande.id } ) }}"> <i class="fa fa-eye" aria-hidden="true" ></i></a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                                </table>
+                            </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

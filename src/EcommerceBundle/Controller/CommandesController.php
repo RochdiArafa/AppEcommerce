@@ -26,7 +26,7 @@ class CommandesController extends Controller
             8/*nbre d'éléments par page*/
         );
 
-        return $this->render('@Ecommerce/LigneCommandes/afficher.html.twig' , [ "user" => $this->getUser(), "lignecommandes" => $lignecommandes ]);
+        return $this->render('@Ecommerce/Commande/consulter.html.twig' , [ "user" => $this->getUser(), "lignecommandes" => $commandes ]);
     }
 
     public function ajouterAction(Request $request)
@@ -46,6 +46,7 @@ class CommandesController extends Controller
         $commandes->setDatecom(new \DateTime());
         $commandes->setUser($this->getUser());
         $commandes->setShippingdetaills($fullname." ,".$tel." ,".$country." ,".$state." ".$postcode." ".$adresse);
+        $commandes->setEtat("En cour");
         $em->persist($commandes);
         $em->flush();
 
@@ -101,6 +102,19 @@ class CommandesController extends Controller
             $em->flush();
         }
 
+
+        //vider le panier
+        $session = $request->getSession();
+        $panier = $session->get('panier');
+
+        $produitpanier = $em->getRepository("EcommerceBundle:Produit")->findArray(array_keys(($session->get('panier'))));
+
+        foreach ($produitpanier as $produit)
+            if (array_key_exists($produit->getId(),$panier)){
+                unset($panier[$produit->getId()]);
+                $session->set('panier' , $panier);
+            }
+
         $router = $this->container->get('router');
         return new RedirectResponse($router->generate('ecommerce_homepage'));
 
@@ -118,7 +132,7 @@ class CommandesController extends Controller
             8/*nbre d'éléments par page*/
         );
 
-        return $this->render('@Ecommerce\Produit\list_dashboard.html.twig' , ["$commandes" => $commandes , "user" => $this->getUser()]);
+        return $this->render('@Ecommerce\Commande\list.html.twig' , ["commandes" => $commandes , "user" => $this->getUser()]);
     }
 
 
@@ -138,12 +152,134 @@ class CommandesController extends Controller
         $lignecommande = $em->getRepository("EcommerceBundle:lignecommande")->findBy(["Produit" => $produit , "Commandes" => $commande]);
 
         //remove ligne commande
-        $em->remove($lignecommande);
+        $em->remove($lignecommande[0]);
+        $em->flush();
+
+        $lignecommande = $em->getRepository("EcommerceBundle:lignecommande")->findBy(["Commandes" => $commande]);
+
+        if(count($lignecommande) == 0) {
+            //remove commande
+            $em->remove($commande);
+            $em->flush();
+
+            $router = $this->container->get('router');
+
+            return new RedirectResponse($router->generate("My_Commande_list_home" ), 307);
+        }
+        else{
+            $router = $this->container->get('router');
+
+            return new RedirectResponse($router->generate("Commande_consulter_home" , ["id" => $id_com]), 307);
+        }
+
+    }
+
+    public function changeretatAction(Request $request)
+    {
+        $id = $request->get('id');
+        $etat = $request->get('etat');
+
+
+        //changer l'etat de la commande
+        $em = $this->getDoctrine()->getManager();
+        $commande = $em->getRepository("EcommerceBundle:Commandes")->find($id);
+        $commande->setEtat($etat);
+        $em->persist($commande);
         $em->flush();
 
         $router = $this->container->get('router');
-
-        return new RedirectResponse($router->generate("lignecommande_list_dashboard"), 307);
+        return new RedirectResponse($router->generate("Commande_list_dashboard"), 307);
 
     }
+
+    public function affichermyAction(Request $request)
+    {
+        //afficher tous les commandes
+
+        $em = $this->getDoctrine()->getManager();
+        $listeCommandes = $em->getRepository("EcommerceBundle:Commandes")->findBy(['User'=> $this->getUser()]);
+        $commandes  = $this->get('knp_paginator')->paginate(
+            $listeCommandes,
+            $request->query->get('page', 1)/*le numéro de la page à afficher*/,
+            8/*nbre d'éléments par page*/
+        );
+
+        $session = $request->getSession();
+
+        if(!$session->has('panier'))
+            $session->set('panier', array());
+
+        if(!$session->has('favorie'))
+            $session->set('favorie', array());
+
+        $em = $this->getDoctrine()->getManager();
+        $produitpanier = $em->getRepository("EcommerceBundle:Produit")->findArray(array_keys(($session->get('panier'))));
+        $produitfavorie = $em->getRepository("EcommerceBundle:Produit")->findArray(array_keys(($session->get('favorie'))));
+
+        //$favorie[id_produit] = 1
+
+        $favorie = $session->get('favorie');
+
+        $session->set('favorie' , $favorie);
+        return $this->render('@Ecommerce/Commande/mylist.html.twig' , [ "commandes" => $commandes ,"user" => $this->getUser() , "produitspanier" => $produitpanier ,  "panier" => $session->get('panier') , "produitsfavorie" => $produitfavorie ,  "favorie" => $session->get('favorie')]);
+        }
+
+    public function monlistconsulterAction(Request $request)
+    {
+        //recuperer id du commandes à consulter
+        $id = $request->get('id');
+
+        //recuperer la commades à consulter à partir de leur id
+        $em = $this->getDoctrine()->getManager();
+        $commande = $em->getRepository("EcommerceBundle:Commandes")->find($id);
+        $lignecommandes = $em->getRepository("EcommerceBundle:lignecommande")->findBy(["Commandes" => $commande]);
+        $commandes  = $this->get('knp_paginator')->paginate(
+            $lignecommandes,
+            $request->query->get('page', 1)/*le numéro de la page à afficher*/,
+            8/*nbre d'éléments par page*/
+        );
+
+        $session = $request->getSession();
+
+        if(!$session->has('panier'))
+            $session->set('panier', array());
+
+        if(!$session->has('favorie'))
+            $session->set('favorie', array());
+
+        $em = $this->getDoctrine()->getManager();
+        $produitpanier = $em->getRepository("EcommerceBundle:Produit")->findArray(array_keys(($session->get('panier'))));
+        $produitfavorie = $em->getRepository("EcommerceBundle:Produit")->findArray(array_keys(($session->get('favorie'))));
+
+        //$favorie[id_produit] = 1
+
+        $favorie = $session->get('favorie');
+
+        $session->set('favorie' , $favorie);
+
+        return $this->render('@Ecommerce/Commande/consultermylist.html.twig' , ["lignecommandes" => $commandes , "etat" => $commande->getEtat()  ,"user" => $this->getUser() , "produitspanier" => $produitpanier ,  "panier" => $session->get('panier') , "produitsfavorie" => $produitfavorie ,  "favorie" => $session->get('favorie') ]);
+    }
+
+    public function updateligneAction(Request $request)
+    {
+        $id_com = $request->get('id_com');
+        $id_prod = $request->get('id_prod');
+        $quantite = $request->get('qte'.$id_prod);
+
+
+        $em = $this->getDoctrine()->getManager();
+        $produit = $em->getRepository("EcommerceBundle:Produit")->find($id_prod);
+        $commande = $em->getRepository("EcommerceBundle:Commandes")->find($id_com);
+
+        $lignecommandes = $em->getRepository("EcommerceBundle:lignecommande")->findBy(["Produit" => $produit , "Commandes" => $commande]);
+
+        $lignecommandes[0]->setQuantite($quantite);
+        $em->persist($lignecommandes[0]);
+        $em->flush();
+
+        $router = $this->container->get('router');
+        return new RedirectResponse($router->generate("Commande_consulter_home" , ["id" => $id_com]), 307);
+    }
+
+
 }

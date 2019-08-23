@@ -152,6 +152,10 @@ Commande_list_dashboard:
     path:     /admin/dashboard/commandes/afficher
     defaults: { _controller: EcommerceBundle:Commandes:afficher }
 
+Commande_changer_etat_dashboard:
+    path:     /admin/dashboard/commandes/etat/changer
+    defaults: { _controller: EcommerceBundle:Commandes:changeretat }
+
 Commande_consulter_dashboard:
     path:     /admin/dashboard/commandes/consulter
     defaults: { _controller: EcommerceBundle:Commandes:consulter }
@@ -161,8 +165,22 @@ Commande_ajouter:
     defaults: { _controller: EcommerceBundle:Commandes:ajouter }
 
 LigneCommande_supprimer:
-    path:     /admin/dashboard/lignecommandes/supprimer
+    path:     /lignecommandes/supprimer
     defaults: { _controller: EcommerceBundle:Commandes:supprimer }
+
+My_Commande_list_home:
+    path:     /commandes/afficher
+    defaults: { _controller: EcommerceBundle:Commandes:affichermy }
+
+Commande_consulter_home:
+    path:     /commandes/consulter
+    defaults: { _controller: EcommerceBundle:Commandes:monlistconsulter }
+
+LigneCommande_update_quantite_home:
+    path:     /commandes/ligne/update
+    defaults: { _controller: EcommerceBundle:Commandes:updateligne }
+
+
 
 
 

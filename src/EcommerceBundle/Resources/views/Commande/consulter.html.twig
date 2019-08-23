@@ -1,0 +1,42 @@
+{% extends 'dashboard.html.twig' %}
+
+{% block content %}
+    <div class="product-status mg-b-15">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="product-status-wrap drp-lst">
+                        <h4>Liste de la Ligne de Commandes</h4>
+                        <div class="asset-inner">
+                            <table>
+                                <tbody><tr>
+                                    <th>Image</th>
+                                    <th>Nom</th>
+                                    <th>Quantité</th>
+                                    <th>Prix Total</th>
+                                    <th>Action</th>
+                                </tr>
+                                {% for lignecommande in lignecommandes %}
+                                    <tr>
+                                        <td> <img src="{{ asset('{{ lignecommande.Produit.image }}') }}" />  </td>
+                                        <td> {{ lignecommande.Produit.nom }}  </td>
+                                        <td> {{ lignecommande.quantite }} </td>
+                                        {% set prixTotal = lignecommande.quantite *  lignecommande.Produit.prix %}
+                                        <td>{{ prixTotal }}</td>
+
+                                        <td>
+                                            <a href="{{ path("Produit_consulter",{'id': lignecommande.Produit.id} ) }}"> <i class="fa fa-eye" aria-hidden="true"></i></a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                            <div class="text-center">{{ knp_pagination_render(lignecommandes) }}</div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content%}
