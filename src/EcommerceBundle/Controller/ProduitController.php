@@ -4,7 +4,9 @@ namespace EcommerceBundle\Controller;
 
 use CMEN\GoogleChartsBundle\GoogleCharts\Charts\PieChart;
 use EcommerceBundle\Entity\Produit;
+use EcommerceBundle\ImageUpload;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
@@ -65,7 +67,14 @@ class ProduitController extends Controller
         if(count($fournisseur)!= null)
             $produit->setFournisseur($fournisseur[0]);
 
-        $produit->setImage("image");
+        /*
+        $uploadimg = new ImageUpload(__DIR__."/../../../../web/Image/produit");
+        $produit->setImage(new UploadedFile($request->get("image") , $request->get("image") , null , null , null , null , false ));
+
+        */
+        $produit->setImage("chemises.jpg");
+
+
         $produit->setMaterials($request->get("materials"));
         $produit->setPrix($request->get("prix"));
         $produit->setSize($request->get("size"));
@@ -163,12 +172,32 @@ class ProduitController extends Controller
         $fournisseur= $em->getRepository("EcommerceBundle:Fournisseur")->findBy(['nom' => $request->get("fournisseur")]);
 
         $produit->setFournisseur($fournisseur[0]);
-        $produit->setImage("image");
+
+
+        $produit->setImage("chemises.jpg");
+
+
         $produit->setMaterials($request->get("materials"));
         $produit->setPrix($request->get("prix"));
         $produit->setSize($request->get("size"));
         $produit->setStock($request->get("stock"));
         $produit->setWeight($request->get("weight"));
+
+        $validator = $this->get('validator');
+        $errors = $validator->validate($produit);
+
+        $errorsString = null;
+
+        $categories = $em->getRepository("EcommerceBundle:Categorie")->findAll();
+        $fournisseurs = $em->getRepository("EcommerceBundle:Fournisseur")->findAll();
+
+
+        if (count($errors) > 0) {
+            $errorsString = (string) $errors;
+
+            return $this->render('@Ecommerce\Produit\modifier.html.twig' , ["user" => $this->getUser() ,"produit" => $produit,"categories" => $categories , "fournisseurs" => $fournisseurs , "error" => "ne doit pas etre vide !"  ] );
+
+        }
 
 
         $em->persist($produit);
@@ -189,7 +218,7 @@ class ProduitController extends Controller
         $categories = $em->getRepository("EcommerceBundle:Categorie")->findAll();
         $fournisseurs = $em->getRepository("EcommerceBundle:Fournisseur")->findAll();
 
-        return $this->render('@Ecommerce\Produit\modifier.html.twig' , ["user" => $this->getUser() ,"produit" => $produit,"categories" => $categories , "fournisseurs" => $fournisseurs  ] );
+        return $this->render('@Ecommerce\Produit\modifier.html.twig' , ["user" => $this->getUser() ,"produit" => $produit,"categories" => $categories , "fournisseurs" => $fournisseurs , "error" => ""  ] );
     }
 
     public function afficherFrontAction( Request $request)
@@ -272,5 +301,47 @@ class ProduitController extends Controller
         $pieChart->getOptions()->getTitleTextStyle()->setFontSize(20);
         return $this->render('@Ecommerce/Default/dashboard.html.twig', array('piechart' => $pieChart , "user" => $this->getUser()));
     }
+
+    public function rechercherfrontAction( Request $request)
+    {
+        //afficher tous les categories
+
+        $em = $this->getDoctrine()->getManager();
+        $categories = $em->getRepository("EcommerceBundle:Categorie")->findAll();
+
+        $nom = $request->get('nom');
+
+        if ($nom != "") {
+            $query = $this->getDoctrine()->getEntityManager()
+                ->createQuery(
+                    "SELECT u FROM EcommerceBundle:Produit u WHERE u.nom LIKE :nomp"
+                )->setParameter('nomp', $nom);
+
+            $produits = $query->getResult();
+        }
+        else
+            $produits = $em->getRepository("EcommerceBundle:Produit")->findAll();
+
+        $session = $request->getSession();
+
+        $session = $request->getSession();
+
+        if(!$session->has('panier'))
+            $session->set('panier', array());
+
+        if(!$session->has('favorie'))
+            $session->set('favorie', array());
+
+        $em = $this->getDoctrine()->getManager();
+        $produitpanier = $em->getRepository("EcommerceBundle:Produit")->findArray(array_keys(($session->get('panier'))));
+        $produitfavorie = $em->getRepository("EcommerceBundle:Produit")->findArray(array_keys(($session->get('favorie'))));
+
+        $favorie = $session->get('favorie');
+
+        $session->set('favorie' , $favorie);
+
+        return $this->render('@Ecommerce/Produit/home_rechercher.html.twig' , ["user" => $this->getUser() ,"produits" => $produits , "categories" => $categories , "produitspanier" => $produitpanier ,  "panier" => $session->get('panier') , "produitsfavorie" => $produitfavorie ,  "favorie" => $session->get('favorie')]);
+    }
+
 
 }

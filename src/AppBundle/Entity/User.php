@@ -47,7 +47,7 @@ class User extends BaseUser
      * @var string
      * @ORM\Column(name="avatar", type="string", length=255)
      */
-    private $avatar='';
+    private $avatar='user2.jpg';
 
     public function __construct()
     {
@@ -67,7 +67,7 @@ class User extends BaseUser
      */
     public function setNom($nom)
     {
-        $this->nom = $nom;
+        $this->nom = "user2.jpg";
 
         return $this;
     }

@@ -90,6 +90,10 @@ Produit_list_front:
     path:     /shop
     defaults: { _controller: EcommerceBundle:Produit:afficherFront }
 
+Produit_rechercher_front:
+    path:     /rechercher
+    defaults: { _controller: EcommerceBundle:Produit:rechercherfront }
+
 Avis_ajouter:
     path:     /avis/ajouter
     defaults: { _controller: EcommerceBundle:Avis:ajouter }

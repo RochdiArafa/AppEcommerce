@@ -22,7 +22,7 @@ class RegistrationFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder ->add('avatar',FileType::class, ['label' => ' '])->add('nom' , null,['label' => ' '])->
+        $builder ->add('avatar',FileType::class , array('data_class' => null), ['label' => ' '])->add('nom' , null,['label' => ' '])->
         add('prenom' , null,['label' => ' '])->add('tel',TextType::class , ['label' => ' '])->add('adresse' , null,['label' => ' '])->add('email' , null,['label' => ' '])->add('password' ,PasswordType::class,['label' => ' '])->add('plainPassword' , PasswordType::class,['label' => ' '])->remove('username');
     }
 

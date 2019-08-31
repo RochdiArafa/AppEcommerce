@@ -87,6 +87,17 @@ class FournisseurController extends Controller
         $fournisseur->setNom($request->get("nom"));
         $fournisseur->setTelephone($request->get("telephone"));
 
+        $validator = $this->get('validator');
+        $errors = $validator->validate($fournisseur);
+
+        $errorsString = null;
+
+        if (count($errors) > 0) {
+            $errorsString = (string) $errors;
+
+            return $this->render('@Ecommerce/Fournisseur/modifier.html.twig' , [ "user" => $this->getUser() , "fournisseur" => $fournisseur , "error" => "ne doit pas etre vide !"]);
+        }
+
         $em->persist($fournisseur);
         $em->flush();
 
@@ -102,7 +113,7 @@ class FournisseurController extends Controller
         $em = $this->getDoctrine()->getManager();
         $fournisseur = $em->getRepository("EcommerceBundle:Fournisseur")->find($id);
 
-        return $this->render('@Ecommerce/Fournisseur/modifier.html.twig' , [ "user" => $this->getUser() , "fournisseur" => $fournisseur]);
+        return $this->render('@Ecommerce/Fournisseur/modifier.html.twig' , [ "user" => $this->getUser() , "fournisseur" => $fournisseur , "error" => ""]);
 
     }
 

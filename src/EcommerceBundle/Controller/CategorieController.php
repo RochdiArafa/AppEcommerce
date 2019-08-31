@@ -88,6 +88,17 @@ class CategorieController extends Controller
         $categorie->setNom($request->get("nom"));
         $categorie->setDescription($request->get("description"));
 
+        $validator = $this->get('validator');
+        $errors = $validator->validate($categorie);
+
+        $errorsString = null;
+
+        if (count($errors) > 0) {
+            $errorsString = (string) $errors;
+
+            return $this->render('@Ecommerce/Categorie/modifier.html.twig' , ["user" => $this->getUser() , "categorie" => $categorie , "error" => "ne doit pas etre vide !"]);
+        }
+
         $em->persist($categorie);
         $em->flush();
 
@@ -103,7 +114,7 @@ class CategorieController extends Controller
         $em = $this->getDoctrine()->getManager();
         $categorie = $em->getRepository("EcommerceBundle:Categorie")->find($id);
 
-        return $this->render('@Ecommerce/Categorie/modifier.html.twig' , ["user" => $this->getUser() , "categorie" => $categorie]);
+        return $this->render('@Ecommerce/Categorie/modifier.html.twig' , ["user" => $this->getUser() , "categorie" => $categorie , "error" => ""]);
 
     }
 

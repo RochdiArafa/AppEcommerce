@@ -12,9 +12,15 @@
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <input name="nom" type="text" class="form-control" placeholder="Nom" value="{{ produit.nom }}">
+                                    {% if error == "ne doit pas etre vide !" %}
+                                        <p style="color:#ac2925"> Nom {{ error }}</p>
+                                    {% endif %}
                                 </div>
                                 <div class="form-group">
                                     <input name="description" type="text" class="form-control" placeholder="Description" value="{{ produit.description }}" >
+                                    {% if error == "ne doit pas etre vide !" %}
+                                        <p style="color:#ac2925"> Description {{ error }}</p>
+                                    {% endif %}
                                 </div>
                                 <div class="form-group">
                                     <input name="materials" type="email" class="form-control" placeholder="matière" value="{{ produit.materials }}">
@@ -32,15 +38,24 @@
                                             <option> {{ categorie.nom }}
                                         {% endfor %}
                                     </datalist>
+                                    {% if error == "ne doit pas etre vide !" %}
+                                        <p style="color:#ac2925"> Categorie {{ error }}</p>
+                                    {% endif %}
                                 </div>
 
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <input name="stock" type="number" class="form-control" placeholder="Quantité" value="{{ produit.stock }}">
+                                    {% if error == "ne doit pas etre vide !" %}
+                                        <p style="color:#ac2925"> Quantité {{ error }}</p>
+                                    {% endif %}
                                 </div>
                                 <div class="form-group">
                                     <input name="prix" type="number" class="form-control" placeholder="Prix" value="{{ produit.prix }}">
+                                    {% if error == "ne doit pas etre vide !" %}
+                                        <p style="color:#ac2925"> Prix {{ error }}</p>
+                                    {% endif %}
                                 </div>
                                 <div class="form-group">
                                     <input name="weight" type="text" class="form-control" placeholder="Poids" value="{{ produit.weight }}">
@@ -55,6 +70,9 @@
                                             <option> {{ fournisseur.nom }}
                                         {% endfor %}
                                     </datalist>
+                                    {% if error == "ne doit pas etre vide !" %}
+                                        <p style="color:#ac2925"> Fournisseur {{ error }}</p>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
