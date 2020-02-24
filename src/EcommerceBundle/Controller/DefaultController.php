@@ -66,4 +66,23 @@ class DefaultController extends Controller
         $router = $this->container->get('router');
         return $this->render('@Ecommerce/Default/contact.html.twig' , ["user" => $this->getUser() , "produitspanier" => $produitpanier ,  "panier" => $session->get('panier') , "produitsfavorie" => $produitfavorie ,  "favorie" => $session->get('favorie')]);
     }
+
+
+    public function sendmailAction(Request $request)
+    {
+        $message = (new \Swift_Message('Hello Email'))
+            ->setFrom('keeptooui@gmail.com')
+            ->setTo($request->get("email"))
+            ->setBody($request->get("msg"));
+
+        $this->get('mailer')->send($message);
+
+        // or, you can also fetch the mailer service this way
+        // $this->get('mailer')->send($message);
+
+        $router = $this->container->get('router');
+        return new RedirectResponse($router->generate('Contact_home'));
+    }
+
+
 }

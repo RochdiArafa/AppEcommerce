@@ -8,6 +8,7 @@ imports:
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: en
+    avatars_directory: '%kernel.project_dir%/web/Image/user'
 
 framework:
     #esi: ~
@@ -103,4 +104,6 @@ knp_paginator:
 
 cmen_google_charts:
     version: "current"
+
+
 

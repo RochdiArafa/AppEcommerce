@@ -47,15 +47,15 @@ class User extends BaseUser
      * @var string
      * @ORM\Column(name="avatar", type="string", length=255)
      */
-    private $avatar='user2.jpg';
+    private $avatar;
 
     public function __construct()
     {
         parent::__construct();
         // your own logic
-        //$this->addRole("ROLE_USER"); // Client
+        $this->addRole("ROLE_USER"); // Client
         // $this->addRole("ROLE_ADMIN"); // Vendeur
-        $this->addRole('ROLE_SUPER_ADMIN');  // Admin
+        //$this->addRole('ROLE_SUPER_ADMIN');  // Admin
     }
 
     /**
@@ -67,7 +67,7 @@ class User extends BaseUser
      */
     public function setNom($nom)
     {
-        $this->nom = "user2.jpg";
+        $this->nom =$nom;
 
         return $this;
     }

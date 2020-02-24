@@ -14,6 +14,8 @@ class PanierController extends Controller
     {
         $id=$request->get("id");
         $qte=$request->get("qte");
+        $color=$request->get("color");
+        $size=$request->get("size");
 
         $session = $request->getSession();
 
@@ -23,6 +25,7 @@ class PanierController extends Controller
         //$panier[id_produit] = quantité
 
         $panier = $session->get('panier');
+        //$panier[$id] = ["qantite" => $qte , "size" => $size , "color" => $color];
 
         $panier[$id] = $qte;
 

@@ -188,6 +188,10 @@ Contact_home:
     path:     /contact
     defaults: { _controller: EcommerceBundle:Default:contact }
 
+send_Email_home:
+    path:     /sendmail
+    defaults: { _controller: EcommerceBundle:Default:sendmail }
+
 
 
 

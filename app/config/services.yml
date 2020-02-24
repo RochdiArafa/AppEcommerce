@@ -34,3 +34,6 @@ services:
     #     arguments:
     #         $someArgument: 'some_value'
 
+    AppBundle\Service\FileUploader:
+        arguments:
+            $targetDirectory: '%avatars_directory%'

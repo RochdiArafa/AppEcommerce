@@ -6,6 +6,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\File\File;
+
+use AppBundle\Service\FileUploader;
+
 
 class UserController extends Controller
 {
@@ -21,7 +25,7 @@ class UserController extends Controller
         $user->setPrenom($request->get("prenom"));
         $user->setAdresse($request->get("adresse"));
         $user->setTel($request->get("tel"));
-        $user->setAvatar($request->get("avatar"));
+
         $user->setPassword($request->get("password"));
         $user->setPlainPassword($request->get("repeatPassword"));
 
