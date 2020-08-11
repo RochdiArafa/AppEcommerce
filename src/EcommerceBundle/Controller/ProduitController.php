@@ -276,16 +276,40 @@ class ProduitController extends Controller
         array_push($data,$stat);
 
         $stat=array();
-        array_push($stat,"All Stock",($totalStock *100)/($totalStock + $totalvendue));
-        $nb=($totalStock *100)/($totalStock + $totalvendue);
-        $stat=["All Stock",$nb];
-        array_push($data,$stat);
+        if($totalStock != 0){
+            array_push($stat,"All Stock",($totalStock *100)/($totalStock + $totalvendue));
+            $nb=($totalStock *100)/($totalStock + $totalvendue);
+            array_push($stat,"All Stock",($totalStock *100)/($totalStock + $totalvendue));
+            $nb=($totalStock *100)/($totalStock + $totalvendue);
 
-        $stat=array();
-        array_push($stat,"Sell",($totalvendue *100)/($totalStock + $totalvendue));
-        $nb=($totalvendue *100)/($totalStock + $totalvendue);
-        $stat=["Sell",$nb];
-        array_push($data,$stat);
+            $stat=["All Stock",$nb];
+            array_push($data,$stat);
+
+            $stat=array();
+            array_push($stat,"Sell",($totalvendue *100)/($totalStock + $totalvendue));
+            $nb=($totalvendue *100)/($totalStock + $totalvendue);
+            $stat=["Sell",$nb];
+            array_push($data,$stat);
+            $msg = "";
+
+        }
+        else{
+            array_push($stat,"All Stock",0);
+            $nb=0;
+            array_push($stat,"All Stock",0);
+            $nb=0;
+
+            $stat=["All Stock",$nb];
+            array_push($data,$stat);
+
+            $stat=array();
+            array_push($stat,"Sell",0);
+            $nb=0;
+            $stat=["Sell",$nb];
+            array_push($data,$stat);
+
+            $msg = "Pas de produit disponible ! ";
+        }
 
 
         $pieChart->getData()->setArrayToDataTable(
@@ -299,7 +323,7 @@ class ProduitController extends Controller
         $pieChart->getOptions()->getTitleTextStyle()->setItalic(true);
         $pieChart->getOptions()->getTitleTextStyle()->setFontName('Arial');
         $pieChart->getOptions()->getTitleTextStyle()->setFontSize(20);
-        return $this->render('@Ecommerce/Default/dashboard.html.twig', array('piechart' => $pieChart , "user" => $this->getUser()));
+        return $this->render('@Ecommerce/Default/dashboard.html.twig', array('piechart' => $pieChart , "user" => $this->getUser() , "msg" => $msg ));
     }
 
     public function rechercherfrontAction( Request $request)
