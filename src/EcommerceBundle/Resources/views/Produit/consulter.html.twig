@@ -50,13 +50,27 @@
 
                 <div class="col-md-6 col-lg-5 p-b-30">
                     <div class="p-r-50 p-t-5 p-lr-0-lg">
-                        <h4 class="mtext-105 cl2 js-name-detail p-b-14">
-                            {{ produit.nom }}
-                        </h4>
 
                         <span class="mtext-106 cl2">
-                           Prix : {{ produit.prix }} DT
+                           {{ produit.nom }}
 						</span>
+
+                        <br>
+
+                        <span class="stext-102 cl3 p-t-23">
+                            <span class="fs-18 cl11">
+                                {% for i in range(0,  TotalEtoile|number_format  //  aviss|length   )  %}
+                                    <i class="zmdi zmdi-star"></i>
+                                {% endfor %}
+                            </span>
+                            ({{ aviss|length }} customer reviews)
+                        </span>
+
+                        <br>
+
+                        <p class="stext-102 cl3 p-t-23">
+                            Prix : {{ produit.prix }} DT
+                        </p>
 
                         <p class="stext-102 cl3 p-t-23">
                             {{ produit.description }}
@@ -147,6 +161,11 @@
                                             <button type="submit" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04" >
                                             Add to cart
                                             </button>
+
+                                            <p class="stext-102 cl3 p-t-23">
+                                                <i class="fa fa-credit-card" aria-hidden="true"></i> Payer en cash à la livraison
+                                            </p>
+
                                         </form>
                                     </div>
                                 </div>

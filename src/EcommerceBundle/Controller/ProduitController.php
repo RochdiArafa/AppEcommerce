@@ -23,7 +23,10 @@ class ProduitController extends Controller
         $produit = $em->getRepository("EcommerceBundle:Produit")->find($id);
 
         $aviss= $em->getRepository("EcommerceBundle:Avis")->findBy(["Produit" => $produit]);
-
+        $TotalEtoile = 0;
+        foreach($aviss as $avis) {
+            $TotalEtoile=$TotalEtoile + $avis->getNombre();
+        }
         $session = $request->getSession();
 
         if(!$session->has('panier'))
@@ -41,7 +44,7 @@ class ProduitController extends Controller
         $favorie = $session->get('favorie');
 
         $session->set('favorie' , $favorie);
-        return $this->render('@Ecommerce/Produit/consulter.html.twig' , [ "user" => $this->getUser(), "produit" => $produit , "aviss" => $aviss , "produitspanier" => $produitpanier ,  "panier" => $session->get('panier') , "produitsfavorie" => $produitfavorie ,  "favorie" => $session->get('favorie')]);
+        return $this->render('@Ecommerce/Produit/consulter.html.twig' , [ "user" => $this->getUser(), "produit" => $produit , "aviss" => $aviss , "TotalEtoile" => $TotalEtoile ,  "produitspanier" => $produitpanier ,  "panier" => $session->get('panier') , "produitsfavorie" => $produitfavorie ,  "favorie" => $session->get('favorie')]);
     }
 
     public function ajouterAction(Request $request)

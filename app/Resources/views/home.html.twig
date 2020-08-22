@@ -57,9 +57,12 @@
                             <a href="#" class="flex-c-m trans-04 p-lr-25">
                                 {{ app.user.nom }} {{ app.user.prenom  }}
                             </a>
-                            <a href="{{ path("dashboard_admin")}}" class="flex-c-m trans-04 p-lr-25">
-                                Dashboard
-                            </a>
+                            {% if is_granted('ROLE_SUPER_ADMIN') %}
+                                <a href="{{ path("dashboard_admin")}}" class="flex-c-m trans-04 p-lr-25">
+                                    Dashboard
+                                </a>
+                            {% endif %}
+
                         {% endif %}
                     </div>
                 </div>
