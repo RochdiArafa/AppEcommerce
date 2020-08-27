@@ -71,7 +71,7 @@
                         <br>
 
                         <p class="stext-102 cl3 p-t-23">
-                            Prix : {{ produit.prix }} DT
+                            Price : {{ produit.prix }} DT
                         </p>
 
                         <p class="stext-102 cl3 p-t-23">
@@ -80,6 +80,7 @@
 
                         <!--  -->
                         <div class="">
+                            <!--
                             {% if produit.size is not empty %}
                                 <p class="stext-102 cl3 p-t-23">
                                     Size : {{ produit.size}}
@@ -91,6 +92,7 @@
                                     Color : {{ produit.color}}
                                 </p>
                             {% endif %}
+                            -->
 
                             <p class="stext-102 cl3 p-t-23">
                                 {% if produit.stock > 10 %}
@@ -109,25 +111,28 @@
                                         <form class="w-full" action="{{ path("Panier_ajouter" , {'id': produit.id} ) }}"  method="post">
                                             <!--  -->
                                             <div style="margin-left: -110px">
-                                                <div class="flex-w flex-r-m p-b-10">
-                                                    <div class="size-203 flex-c-m respon6">
-                                                        Size
-                                                    </div>
+                                                {% if produit.size is not empty %}
+                                                    <div class="flex-w flex-r-m p-b-10">
+                                                        <div class="size-203 flex-c-m respon6">
+                                                            Size
+                                                        </div>
 
-                                                    <div class="size-204 respon6-next">
-                                                        <div class="rs1-select2 bor8 bg0">
-                                                            <select class="js-select2" name="size">
-                                                                <option>Choose an option</option>
-                                                                {% set sizes = produit.size|split(',') %}
-                                                                {% for size in sizes %}
-                                                                    <option>{{ size }}</option>
-                                                                {% endfor %}
-                                                            </select>
-                                                            <div class="dropDownSelect2"></div>
+                                                        <div class="size-204 respon6-next">
+                                                            <div class="rs1-select2 bor8 bg0">
+                                                                <select class="js-select2" name="size">
+                                                                    <option>Choose an option</option>
+                                                                    {% set sizes = produit.size|split(',') %}
+                                                                    {% for size in sizes %}
+                                                                        <option>{{ size }}</option>
+                                                                    {% endfor %}
+                                                                </select>
+                                                                <div class="dropDownSelect2"></div>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                {% endif %}
 
+                                            {% if produit.color is not empty %}
                                                 <div class="flex-w flex-r-m p-b-10">
                                                     <div class="size-203 flex-c-m respon6">
                                                         Color
@@ -147,6 +152,7 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            {% endif %}
 
                                         <div class="wrap-num-product flex-w m-r-20 m-tb-10">
                                             <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">

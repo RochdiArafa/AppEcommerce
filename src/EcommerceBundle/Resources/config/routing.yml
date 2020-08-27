@@ -132,7 +132,7 @@ notification_user:
     methods: [POST]
 
 Notification_supprimer:
-    path:     /admin/dashboard/notification/supprimer
+    path:     /admin/dashboard/dashboard/notification/supprimer
     defaults: { _controller: EcommerceBundle:Notification:supprimer }
 
 user_update:

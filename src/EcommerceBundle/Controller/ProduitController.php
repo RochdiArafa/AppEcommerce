@@ -262,6 +262,7 @@ class ProduitController extends Controller
         $em= $this->getDoctrine();
         $produits = $em->getRepository("EcommerceBundle:Produit")->findAll();
         $lignecommandes = $em->getRepository("EcommerceBundle:lignecommande")->findAll();
+        $commandes = $em->getRepository("EcommerceBundle:Commandes")->findAll();
 
         $totalStock =0;
         foreach($produits as $produit) {
@@ -270,7 +271,11 @@ class ProduitController extends Controller
 
         $totalvendue = 0;
         foreach($lignecommandes as $lignecommande) {
-            $totalvendue=$totalvendue + $lignecommande->getQuantite();
+            foreach($commandes as $commande) {
+                if($commande->getId() == $lignecommande->getCommandes()->getId() && $commande->getEtat() == "Accepter"){
+                    $totalvendue=$totalvendue + $lignecommande->getQuantite();
+                }
+            }
         }
 
         $data= array();

@@ -58,7 +58,7 @@ class PanierController extends Controller
         $adresseMsg = $request->get('adresseMsg');
 
         $router = $this->container->get('router');
-        return $this->render('@Ecommerce/Panier/afficher.html.twig', [ "user" => $this->getUser() , "fullnameMsg" => $fullnameMsg , "telMsg" => $telMsg  , "countryMsg" => $countryMsg, "stateMsg" => $stateMsg, "postcodeMsg" => $postcodeMsg, "adresseMsg" => $adresseMsg, "produitspanier" => $produitpanier ,  "panier" => $session->get('panier') , "produitsfavorie" => $produitfavorie ,  "favorie" => $session->get('favorie')]);
+        return $this->render('@Ecommerce/Panier/afficher.html.twig', [ "user" => $this->getUser() , "fullnameMsg" => $fullnameMsg , "telMsg" => telMsg  , "countryMsg" => $countryMsg, "stateMsg" => $stateMsg, "postcodeMsg" => $postcodeMsg, $adresseMsg => $adresseMsg, "produitspanier" => $produitpanier ,  "panier" => $session->get('panier') , "produitsfavorie" => $produitfavorie ,  "favorie" => $session->get('favorie')]);
 
     }
 

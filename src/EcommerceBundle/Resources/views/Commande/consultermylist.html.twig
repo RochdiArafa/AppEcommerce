@@ -61,7 +61,7 @@
                                 {% if etat == 'En cour'  %}
 
                                     <td>
-                                        <a href="{{ path("LigneCommande_supprimer",{'id': lignecommande.Produit.id} ) }}"> <i class="fa fa-trash" aria-hidden="true"></i></a>
+                                        <a href="{{ path("LigneCommande_supprimer",{'id_prod': lignecommande.Produit.id , 'id_com': lignecommande.Commandes.id} ) }}"> <i class="fa fa-trash" aria-hidden="true"></i></a>
                                         <button style="background-color: white; border-color: white; border-style: solid; color: #0a6aa1 " type="submit"> <i class="fa fa-refresh" aria-hidden="true"></i> </button>
 
                                     </td>
