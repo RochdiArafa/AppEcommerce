@@ -47,7 +47,7 @@
                                         </div>
                                     </td>
                                     <td class="column-2">{{ produitpanier.nom }}</td>
-                                    <td class="column-3">{{ produitpanier.prix }}</td>
+                                    <td class="column-3">{{ produitpanier.prix }}DT</td>
                                     <td class="column-4">
                                         <div class="wrap-num-product flex-w m-l-auto m-r-0">
                                             <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
@@ -65,7 +65,7 @@
                                     {% set prixTotal = produitpanier.prix * panier[produitpanier.id] %}
                                     {% set prixTotalfac = prixTotalfac + prixTotal %}
 
-                                    <td class="column-5"> <p id="prixTotal{{ produitpanier.id }}">{{ prixTotal }}</p></td>
+                                    <td class="column-5"> <p id="prixTotal{{ produitpanier.id }}">{{ prixTotal }}DT</p></td>
                                     <td><a style="color:black;" href="{{ path("Panier_supprimer" , {'id': produitpanier.id} ) }}"><i class="zmdi zmdi-delete zmdi-hc-2x trash"></i></a>
                                 </tr>
 
@@ -109,7 +109,7 @@
 
                             <div class="size-209">
 								<span class="mtext-110 cl2">
-									<p id="TotalFacture"> {{ prixTotalfac }}</p>
+									<p id="TotalFacture"> {{ prixTotalfac }}DT</p>
 								</span>
                             </div>
                         </div>
@@ -188,7 +188,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <button type="submit" class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
                                 Buy
                             </button>

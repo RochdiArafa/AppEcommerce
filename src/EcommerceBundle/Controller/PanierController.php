@@ -22,14 +22,22 @@ class PanierController extends Controller
         if(!$session->has('panier'))
             $session->set('panier', array());
 
+        if(!$session->has('commande'))
+            $session->set('commande', array());
+
         //$panier[id_produit] = quantité
 
         $panier = $session->get('panier');
         //$panier[$id] = ["qantite" => $qte , "size" => $size , "color" => $color];
 
+        $commande = $session->get('commande');
+
         $panier[$id] = $qte;
 
+        $commande[$id] = ["size" => $size , "color" => $color];;
+
         $session->set('panier' , $panier);
+        $session->set('commande' , $commande);
 
         $router = $this->container->get('router');
         return new RedirectResponse($router->generate('Produit_consulter' , ["id" => $id ,"user" => $this->getUser()]));
@@ -45,9 +53,20 @@ class PanierController extends Controller
         if(!$session->has('favorie'))
             $session->set('favorie', array());
 
+        if(!$session->has('commande'))
+            $session->set('commande', array());
+
         $em = $this->getDoctrine()->getManager();
         $produitpanier = $em->getRepository("EcommerceBundle:Produit")->findArray(array_keys(($session->get('panier'))));
         $produitfavorie = $em->getRepository("EcommerceBundle:Produit")->findArray(array_keys(($session->get('favorie'))));
+
+        /*
+        $commandeInfos = $session->get('commande');
+        $size = "";
+        foreach ($commandeInfos as $commandeInfo){
+            $size = $commandeInfo['size'];
+        }
+        */
 
         //get error messages
         $fullnameMsg = $request->get('fullnameMsg');
@@ -58,7 +77,7 @@ class PanierController extends Controller
         $adresseMsg = $request->get('adresseMsg');
 
         $router = $this->container->get('router');
-        return $this->render('@Ecommerce/Panier/afficher.html.twig', [ "user" => $this->getUser() , "fullnameMsg" => $fullnameMsg , "telMsg" => telMsg  , "countryMsg" => $countryMsg, "stateMsg" => $stateMsg, "postcodeMsg" => $postcodeMsg, $adresseMsg => $adresseMsg, "produitspanier" => $produitpanier ,  "panier" => $session->get('panier') , "produitsfavorie" => $produitfavorie ,  "favorie" => $session->get('favorie')]);
+        return $this->render('@Ecommerce/Panier/afficher.html.twig', [ "user" => $this->getUser() , "fullnameMsg" => $fullnameMsg , "telMsg" => $telMsg  , "countryMsg" => $countryMsg, "stateMsg" => $stateMsg, "postcodeMsg" => $postcodeMsg, "adresseMsg" => $adresseMsg, "produitspanier" => $produitpanier ,  "panier" => $session->get('panier') , "produitsfavorie" => $produitfavorie ,  "favorie" => $session->get('favorie')]);
 
     }
 
