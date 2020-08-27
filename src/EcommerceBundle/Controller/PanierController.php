@@ -49,9 +49,16 @@ class PanierController extends Controller
         $produitpanier = $em->getRepository("EcommerceBundle:Produit")->findArray(array_keys(($session->get('panier'))));
         $produitfavorie = $em->getRepository("EcommerceBundle:Produit")->findArray(array_keys(($session->get('favorie'))));
 
+        //get error messages
+        $fullnameMsg = $request->get('fullnameMsg');
+        $telMsg = $request->get('telMsg');
+        $countryMsg = $request->get('countryMsg');
+        $stateMsg = $request->get('stateMsg');
+        $postcodeMsg = $request->get('postcodeMsg');
+        $adresseMsg = $request->get('adresseMsg');
 
         $router = $this->container->get('router');
-        return $this->render('@Ecommerce/Panier/afficher.html.twig', [ "user" => $this->getUser() , "produitspanier" => $produitpanier ,  "panier" => $session->get('panier') , "produitsfavorie" => $produitfavorie ,  "favorie" => $session->get('favorie')]);
+        return $this->render('@Ecommerce/Panier/afficher.html.twig', [ "user" => $this->getUser() , "fullnameMsg" => $fullnameMsg , "telMsg" => $telMsg  , "countryMsg" => $countryMsg, "stateMsg" => $stateMsg, "postcodeMsg" => $postcodeMsg, "adresseMsg" => $adresseMsg, "produitspanier" => $produitpanier ,  "panier" => $session->get('panier') , "produitsfavorie" => $produitfavorie ,  "favorie" => $session->get('favorie')]);
 
     }
 

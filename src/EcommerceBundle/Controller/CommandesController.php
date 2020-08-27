@@ -40,83 +40,119 @@ class CommandesController extends Controller
         $postcode = $request->get('postcode');
         $adresse = $request->get('adresse');
 
-        //ajouter nouveau commande
-        $commandes = new Commandes();
-        $commandes->setpaye(false);
-        $commandes->setDatecom(new \DateTime());
-        $commandes->setUser($this->getUser());
-        $commandes->setShippingdetaills($fullname." ,".$tel." ,".$country." ,".$state." ".$postcode." ".$adresse);
-        $commandes->setEtat("En cour");
-        $em->persist($commandes);
-        $em->flush();
+        //manage errors message
+        $fullnameMsg = "";
+        $telMsg = "";
+        $countryMsg = "";
+        $stateMsg = "";
+        $postcodeMsg = "";
+        $adresseMsg = "";
 
-        //ajouter les ligne de commande qui apartient a ce commande
-
-        $session = $request->getSession();
-
-        if(!$session->has('panier'))
-            $session->set('panier', array());
-
-        if(!$session->has('favorie'))
-            $session->set('favorie', array());
-
-        $em = $this->getDoctrine()->getManager();
-        $produitpanier = $em->getRepository("EcommerceBundle:Produit")->findArray(array_keys(($session->get('panier'))));
-        $panier = $session->get('panier');
-
-        foreach ($produitpanier as $produit){
-            $lignecommande = new lignecommande();
-            $lignecommande->setCommandes($commandes);
-            $lignecommande->setProduit($produit);
-            $lignecommande->setQuantite($panier[$produit->getId()]);
-            $em->persist($lignecommande);
-            $em->flush();
-
-            //diminuer le quantite de produit aprés vente
-            $produit = $em->getRepository("EcommerceBundle:Produit")->find($produit->getId());
-            $produit->setStock( $produit->getStock() - $panier[$produit->getId()]);
-            $em->persist($produit);
-            $em->flush();
+        if($fullname == ""){
+            $fullnameMsg = "Full Name is required";
+        }
+        if($tel == ""){
+            $telMsg = "Mobile is required";
+        }
+        if($country == ""){
+            $countryMsg = "Country is required";
+        }
+        if($state == ""){
+            $stateMsg = "State is required";
+        }
+        if($postcode == ""){
+            $postcodeMsg = "Postcode is required";
+        }
+        if($adresse == ""){
+            $adresseMsg = "Adresse is required";
         }
 
-        //ajouter un nouveau notification au vendeur
-        //recuperer tous les admins
-        $query = $this->getDoctrine()->getEntityManager()
-            ->createQuery(
-                'SELECT u FROM AppBundle:User u WHERE u.roles LIKE :role'
-            )->setParameter('role', 'a:1:{i:0;s:16:"ROLE_SUPER_ADMIN";}');
-
-        $vendeur = $query->getResult();
-
-        //parcourir la list des vendeur , et envoyer à chacun une notification
-        for($i = 0; $i < count($vendeur); ++$i) {
-            //ajouter nouveau notification
-            $notification = new Notification();
-            $notification->setTitle("Nouveau commande");
-            $notification->setDescription("un nouveau commande a été affecter");
-            $notification->setDaten(new \DateTime());
-            $notification->setEtat("seen");
-            $notification->setUser($vendeur[$i]);
-
-            $em->persist($notification);
+        if($fullname != "" && $tel != "" && $country != "" && $state != "" && $postcode != "" && $adresse != ""){
+            //ajouter nouveau commande
+            $commandes = new Commandes();
+            $commandes->setpaye(false);
+            $commandes->setDatecom(new \DateTime());
+            $commandes->setUser($this->getUser());
+            $commandes->setShippingdetaills($fullname." ,".$tel." ,".$country." ,".$state." ".$postcode." ".$adresse);
+            $commandes->setEtat("En cour");
+            $em->persist($commandes);
             $em->flush();
-        }
 
+            //ajouter les ligne de commande qui apartient a ce commande
 
-        //vider le panier
-        $session = $request->getSession();
-        $panier = $session->get('panier');
+            $session = $request->getSession();
 
-        $produitpanier = $em->getRepository("EcommerceBundle:Produit")->findArray(array_keys(($session->get('panier'))));
+            if(!$session->has('panier'))
+                $session->set('panier', array());
 
-        foreach ($produitpanier as $produit)
-            if (array_key_exists($produit->getId(),$panier)){
-                unset($panier[$produit->getId()]);
-                $session->set('panier' , $panier);
+            if(!$session->has('favorie'))
+                $session->set('favorie', array());
+
+            $em = $this->getDoctrine()->getManager();
+            $produitpanier = $em->getRepository("EcommerceBundle:Produit")->findArray(array_keys(($session->get('panier'))));
+            $panier = $session->get('panier');
+
+            foreach ($produitpanier as $produit){
+                $lignecommande = new lignecommande();
+                $lignecommande->setCommandes($commandes);
+                $lignecommande->setProduit($produit);
+                $lignecommande->setQuantite($panier[$produit->getId()]);
+                $em->persist($lignecommande);
+                $em->flush();
+
+                //diminuer le quantite de produit aprés vente
+                $produit = $em->getRepository("EcommerceBundle:Produit")->find($produit->getId());
+                $produit->setStock( $produit->getStock() - $panier[$produit->getId()]);
+                $em->persist($produit);
+                $em->flush();
             }
 
-        $router = $this->container->get('router');
-        return new RedirectResponse($router->generate('ecommerce_homepage'));
+            //ajouter un nouveau notification au vendeur
+            //recuperer tous les admins
+            $query = $this->getDoctrine()->getEntityManager()
+                ->createQuery(
+                    'SELECT u FROM AppBundle:User u WHERE u.roles LIKE :role'
+                )->setParameter('role', 'a:1:{i:0;s:16:"ROLE_SUPER_ADMIN";}');
+
+            $vendeur = $query->getResult();
+
+            //parcourir la list des vendeur , et envoyer à chacun une notification
+            for($i = 0; $i < count($vendeur); ++$i) {
+                //ajouter nouveau notification
+                $notification = new Notification();
+                $notification->setTitle("Nouveau commande");
+                $notification->setDescription("un nouveau commande a été affecter");
+                $notification->setDaten(new \DateTime());
+                $notification->setEtat("seen");
+                $notification->setUser($vendeur[$i]);
+
+                $em->persist($notification);
+                $em->flush();
+            }
+
+
+            //vider le panier
+            $session = $request->getSession();
+            $panier = $session->get('panier');
+
+            $produitpanier = $em->getRepository("EcommerceBundle:Produit")->findArray(array_keys(($session->get('panier'))));
+
+            foreach ($produitpanier as $produit)
+                if (array_key_exists($produit->getId(),$panier)){
+                    unset($panier[$produit->getId()]);
+                    $session->set('panier' , $panier);
+                }
+
+            $router = $this->container->get('router');
+            return new RedirectResponse($router->generate('ecommerce_homepage'));
+        }else{
+            $router = $this->container->get('router');
+            return new RedirectResponse($router->generate('Panier_afficher' , [ "fullnameMsg" => $fullnameMsg , "telMsg" => $telMsg  , "countryMsg" => $countryMsg, "stateMsg" => $stateMsg, "postcodeMsg" => $postcodeMsg, "adresseMsg" => $adresseMsg]));
+        }
+
+
+
+
 
     }
 

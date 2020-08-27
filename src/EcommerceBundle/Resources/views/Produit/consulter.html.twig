@@ -59,9 +59,11 @@
 
                         <span class="stext-102 cl3 p-t-23">
                             <span class="fs-18 cl11">
-                                {% for i in range(0,  TotalEtoile|number_format  //  aviss|length   )  %}
-                                    <i class="zmdi zmdi-star"></i>
-                                {% endfor %}
+                                {% if aviss|length != 0 %}
+                                    {% for i in range(0,  TotalEtoile|number_format  //  aviss|length   )  %}
+                                        <i class="zmdi zmdi-star"></i>
+                                    {% endfor %}
+                                 {% endif %}
                             </span>
                             ({{ aviss|length }} customer reviews)
                         </span>
