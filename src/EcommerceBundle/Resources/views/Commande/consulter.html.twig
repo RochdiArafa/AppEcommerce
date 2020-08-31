@@ -12,6 +12,8 @@
                                 <tbody><tr>
                                     <th>Image</th>
                                     <th>Nom</th>
+                                    <th>Size</th>
+                                    <th>Color</th>
                                     <th>Quantité</th>
                                     <th>Prix Total</th>
                                     <th>Action</th>
@@ -20,6 +22,8 @@
                                     <tr>
                                         <td>  <img src=" {{ asset('Image/produit/'~lignecommande.Produit.image)}}" alt="IMG-PRODUCT">  </td>
                                         <td> {{ lignecommande.Produit.nom }}  </td>
+                                        <td> {{ lignecommande.size }} </td>
+                                        <td> {{ lignecommande.color }} </td>
                                         <td> {{ lignecommande.quantite }} </td>
                                         {% set prixTotal = lignecommande.quantite *  lignecommande.Produit.prix %}
                                         <td>{{ prixTotal }}</td>

@@ -88,15 +88,27 @@ class CommandesController extends Controller
             if(!$session->has('favorie'))
                 $session->set('favorie', array());
 
+            if(!$session->has('commande'))
+                $session->set('commande', array());
+
             $em = $this->getDoctrine()->getManager();
             $produitpanier = $em->getRepository("EcommerceBundle:Produit")->findArray(array_keys(($session->get('panier'))));
             $panier = $session->get('panier');
+            $commandeInfos = $session->get('commande');
 
             foreach ($produitpanier as $produit){
                 $lignecommande = new lignecommande();
                 $lignecommande->setCommandes($commandes);
                 $lignecommande->setProduit($produit);
                 $lignecommande->setQuantite($panier[$produit->getId()]);
+                foreach ($commandeInfos as $key => $value) {
+                    if($key == $produit->getId()){
+                        $lignecommande->setSize($value['size']);
+                        $lignecommande->setColor($value['color']);
+                    }
+                }
+                $lignecommande->setQuantite($panier[$produit->getId()]);
+
                 $em->persist($lignecommande);
                 $em->flush();
 
