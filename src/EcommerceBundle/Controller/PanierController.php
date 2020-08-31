@@ -35,10 +35,10 @@ class PanierController extends Controller
         $panier[$id] = $qte;
 
         if($size != ""){
-            $commande[$id] = ["size" => $size];;
+            $commande[$id] = ["size" => $size];
         }
         if($color != ""){
-            $commande[$id] = ["color" => $color];;
+            $commande[$id] = ["color" => $color];
         }
 
         $session->set('panier' , $panier);

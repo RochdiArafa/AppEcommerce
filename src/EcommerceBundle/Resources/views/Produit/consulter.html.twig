@@ -94,15 +94,20 @@
                             {% endif %}
                             -->
 
-                            <p class="stext-102 cl3 p-t-23">
-                                {% if produit.stock > 10 %}
-                                    Stock : Available
-                                {% elseif produit.stock > 0 %}
-                                    Only {{ produit.stock }} left!
-                                {% else %}
+                            {% if produit.stock > 10 %}
+                                <p class="stext-102 cl3 p-t-23">
+                                    Stock : {{ produit.stock }} Available
+                                </p>
+                            {% elseif produit.stock > 0 %}
+                                <p class="stext-102 cl3 p-t-23">
+                                    Stock : Only {{ produit.stock }} left!
+                                </p>
+                            {% else %}
+                                <p class="stext-102 cl3 p-t-23" style="color: #e70012">
                                     Stock : Sold-out!
-                                {% endif %}
-                            </p>
+                                </p>
+                            {% endif %}
+
 
 
                             {% if produit.stock > 0 %}
@@ -159,7 +164,7 @@
                                                 <i class="fs-16 zmdi zmdi-minus"></i>
                                             </div>
 
-                                            <input class="mtext-104 cl3 txt-center num-product" type="number" name="qte" value="1">
+                                            <input class="mtext-104 cl3 txt-center num-product" type="number" name="qte" value="1" max={{ produit.stock}}>
 
                                             <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
                                                 <i class="fs-16 zmdi zmdi-plus"></i>
