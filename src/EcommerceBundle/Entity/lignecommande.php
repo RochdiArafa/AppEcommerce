@@ -37,6 +37,20 @@ class lignecommande
 
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="size", type="string", length=255)
+     */
+    private $size;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="color", type="string", length=255)
+     */
+    private $color;
+
+    /**
      * Set quantite
      *
      * @param integer $quantite
@@ -106,5 +120,53 @@ class lignecommande
     public function getProduit()
     {
         return $this->Produit;
+    }
+
+    /**
+     * Set size
+     *
+     * @param string $size
+     *
+     * @return Produit
+     */
+    public function setSize($size)
+    {
+        $this->size = $size;
+
+        return $this;
+    }
+
+    /**
+     * Get size
+     *
+     * @return string
+     */
+    public function getSize()
+    {
+        return $this->size;
+    }
+
+    /**
+     * Set color
+     *
+     * @param string $color
+     *
+     * @return Produit
+     */
+    public function setColor($color)
+    {
+        $this->color = $color;
+
+        return $this;
+    }
+
+    /**
+     * Get color
+     *
+     * @return string
+     */
+    public function getColor()
+    {
+        return $this->color;
     }
 }
